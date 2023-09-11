@@ -175,8 +175,7 @@ def createEmployees(request):
             password = request.POST['password1']
 
             # สร้าง User ในระบบ Django
-            user = User.objects.create_user(
-                username=username, password=password, email=email)
+            user = User.objects.create_user(username=username, password=password, email=email)
             user.first_name = first_name
             user.last_name = last_name
             user.is_staff = True

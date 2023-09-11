@@ -34,26 +34,15 @@
                             </tr>
                         </thead>
                         <tbody>
-                            {% for contract in contracts %}
+                            {% comment %} {% for contract in contracts %}
                                 <tr>
                                     <td class="text-center">{{ contract.get_date }}</td>
                                     <td class="text-center">{{ contract.get_time }}</td>
                                     <td class="text-center">
-                                        {% comment %} <a href="{% url 'editContracts' contract.id %}">
-                                            <i class="fa-solid fa-pen-to-square btn btn-primary"></i>
-                                        </a>
-                                        <a href="#" onclick="alertConfirmed('{{ contract.id }}'); return false;">
-                                            <i class="fa-solid fa-trash btn btn-danger"></i>
-                                        </a> {% endcomment %}
-                                        {% comment %} <a href="{% url 'purchasesDetail' detail.id %}">
-                                            <i class="fa-solid fa-eye btn btn-light"></i>
-                                        </a> {% endcomment %}
-                                        {% comment %} <a href="{% url 'contractsDetail' contract.id %}">
-                                            <i class="fa-solid fa-file-invoice btn btn-success"></i>
-                                        </a> {% endcomment %}
+                                        
                                     </td>
                                 </tr>
-                            {% endfor %}
+                            {% endfor %} {% endcomment %}
                         </tbody>
                     </table>
                     {% comment %} <form method="POST" action="{% url 'sendLineNotification' %}">

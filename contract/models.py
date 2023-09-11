@@ -14,12 +14,12 @@ class Contract(models.Model):
         ('6', '6 เดือน'),
     ]
     customer = models.ForeignKey(Customer, on_delete=models.CASCADE)    # ข้อมูลลูกค้า
-    date_time = models.DateTimeField(auto_now_add=True)     # วันที่
-    title = models.CharField(max_length=255)    # ประเภททอง
-    weight = models.DecimalField(max_digits=10, decimal_places=2)   # น้ำหนักทอง                  # น้ำหนักทองที่รับซื้อ
-    price = models.DecimalField(max_digits=10, decimal_places=2)    # ราคาทอง
+    date_time = models.DateTimeField(auto_now_add=True)                 # วันที่
+    title = models.CharField(max_length=255)                            # ประเภททอง
+    weight = models.DecimalField(max_digits=10, decimal_places=2)       # น้ำหนักทอง                  
+    price = models.DecimalField(max_digits=10, decimal_places=2)        # ราคาทอง
     period = models.CharField(max_length=255, choices=PERIOD_CHOICES)   # งวดที่ต้องการชำระต่อเดือน
-    picture = models.ImageField(upload_to='contract/', blank=True) # รูปภาพ
+    picture = models.ImageField(upload_to='contract/', blank=True)      # รูปภาพ
     
     # ฟังก์ชั่นวันที่ และเวลา
     def get_date(self):
