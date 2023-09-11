@@ -45,9 +45,7 @@ def addItem(request):
             messages.error(request, "ไม่สามารถบันทึกรายการได้")
     else:
         form = ContractItemForm()
-    context = {
-        'form': form,
-        }
+    context = {'form': form,}
     return render(request, "contract/contractsItem.html", context)
 
 
