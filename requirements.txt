@@ -1,3 +1,9 @@
+สร้าง Virtual Environment
+Python -m virtualenv venv
+
+ใช้คำสั่ง .\venv\scripts\activate เพื่อ activate
+
+ติดตั้ง packages
 pip install beautifulsoup4
 pip install Pillow
 pip install mysqlclient
@@ -9,3 +15,15 @@ pip install django-api-generator
 pip install python-dotenv
 pip install whitenoise
 pip install pytz
+
+ใช้คำสั่ง makemigrations เป็นการแปลง models ของเราให้เป็น schema ของฐานข้อมูล
+python manage.py makemigrations 
+
+ใช้คำสั่ง migrate ยืนยันการ migrate ตัว schema ทั้งหลายเหล่านี้ลงไปสู่ฐานข้อมูล
+python manage.py migrate 
+
+ใช้คำสั่ง createsuperuser เป็นการสร้าง username ให้กับ admin
+python manage.py createsuperuser
+
+ใช้คำสั่ง runserver เพื่อ run project
+python manage.py runserver
