@@ -1,0 +1,232 @@
+{% extends 'components/base.html' %} 
+{% load static %}
+
+{% block content %}
+<div class="row">
+    <div class="col-sm-12">
+        <div class="card">
+            <div class="card-header">
+                <h5>แบบฟอร์มเพิ่มสินค้า</h5>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-12">
+                        <form method="POST" enctype="multipart/form-data">
+                            {% csrf_token %}
+                            <div class="row">
+                                <div class="col-12 col-md-12 px-5">
+                                    <div class="form-group">
+                                        <label>ประเภทสินค้า</label>
+                                        {{ form.category }}
+                                    </div>                            
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-12 col-md-6 px-5">
+                                    <div class="form-group">
+                                        <label>รหัสสินค้า</label>
+                                        {{ form.id }}
+                                    </div>
+                                </div>
+                                <div class="col-12 col-md-6 px-5">
+                                    <div class="form-group">
+                                        <label>ชื่อสินค้า</label>
+                                        {{ form.title }}
+                                    </div>
+                                </div>                            
+                            </div>
+                            <div class="row">
+                                <div class="col-12 col-md-6 px-5">
+                                    <div class="form-group">
+                                        <label>จำนวน</label>
+                                        <div class="d-flex">
+                                            {{ form.stock }}
+                                            <span class="ml-2 mt-3">ชิ้น</span>
+                                        </div>
+                                    </div>
+                                </div>  
+                                <div class="col-12 col-md-6 px-5">
+                                    <div class="form-group">
+                                        <label>น้ำหนัก</label>
+                                        <div class="d-flex">
+                                            {{ form.weight }}
+                                            <span class="ml-2 mt-3">กรัม</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-12 col-md-6 px-5">
+                                    <div class="form-group">
+                                        <label>ค่ากำเหน็ด</label>
+                                        <div class="d-flex">
+                                            {{ form.charge }}
+                                            <span class="ml-2 mt-3">บาท</span>
+                                        </div>
+                                    </div>
+                                </div>  
+                                <div class="col-12 col-md-6 px-5">
+                                    <div class="form-group">
+                                        <label>ราคาทองคำ</label>
+                                        <div class="d-flex">
+                                            {{ form.price }}
+                                            <span class="ml-2 mt-3">บาท</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-12 col-md-12 px-5">
+                                    <div class="form-group">
+                                        <label >รายละเอียดสินค้า</label>
+                                        {{ form.description }}
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-12 col-md-6 px-5">
+                                    <div class="form-group">
+                                        <label>สถานะสินค้า</label>
+                                        {{ form.available }}
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-12 col-md-12 px-5 mt-3">
+                                    <div class="form-group">
+                                        <label for="images" class="drop-container">
+                                            <span class="drop-title">อัพโหลดรูปภาพ</span>
+                                            {{ form.picture1 }}
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-12 col-md-12 px-5 mt-3">
+                                    <div class="form-group">
+                                        <label for="images" class="drop-container">
+                                            <span class="drop-title">อัพโหลดรูปภาพ</span>
+                                            {{ form.picture2 }}
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-12 col-md-12 px-5 mt-3">
+                                    <div class="form-group">
+                                        <label for="images" class="drop-container">
+                                            <span class="drop-title">อัพโหลดรูปภาพ</span>
+                                            {{ form.picture3 }}
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-12 col-md-12 px-5 mt-3">
+                                    <div class="form-group">
+                                        <label for="images" class="drop-container">
+                                            <span class="drop-title">อัพโหลดรูปภาพ</span>
+                                            {{ form.picture4 }}
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-12 col-md-12 px-5 mt-3">
+                                    <div class="form-group">
+                                        <label for="images" class="drop-container">
+                                            <span class="drop-title">อัพโหลดรูปภาพ</span>
+                                            {{ form.picture5 }}
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-12 col-md-12 px-5 mt-3">
+                                    <button type="submit" class="btn btn-success">บันทึกข้อมูล</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% block css %}
+<style>
+    .drop-container {
+        position: relative;
+        display: flex;
+        gap: 10px;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        height: 120px;
+        padding: 10px;
+        border-radius: 10px;
+        border: 2px dashed #555;
+        color: #444;
+        cursor: pointer;
+        transition: background 0.2s ease-in-out, border 0.2s ease-in-out;
+    }
+
+    .drop-container:hover {
+        background: #eee;
+        border-color: #111;
+    }
+
+    .drop-container:hover .drop-title {
+        color: #222;
+    }
+
+    .drop-title {
+        color: #444;
+        font-size: 20px;
+        font-weight: bold;
+        text-align: center;
+        transition: color 0.2s ease-in-out;
+    }
+
+    input[type="file"] {
+        width: 350px;
+        max-width: 100%;
+        color: #444;
+        padding: 5px;
+        background: #fff;
+        border-radius: 10px;
+        border: 1px solid #555;
+    }
+
+    input[type="file"]::file-selector-button {
+        margin-right: 20px;
+        border: none;
+        background: #084cdf;
+        padding: 10px 20px;
+        border-radius: 10px;
+        color: #fff;
+        cursor: pointer;
+        transition: background 0.2s ease-in-out;
+    }
+
+    input[type="file"]::file-selector-button:hover {
+        background: #0d45a5;
+    }
+
+
+    div.img-resize img {
+        width: 300px;
+        height: auto;
+        margin-top: 10px;
+        margin-bottom: 10px;
+    }
+
+    div.img-resize {
+        width: 100%%;
+        height: auto;
+        overflow: hidden;
+        text-align: center;
+    }
+</style>
+{% endblock css %}
+{% endblock content %}

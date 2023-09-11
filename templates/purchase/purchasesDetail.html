@@ -1,0 +1,82 @@
+{% extends 'components/base.html' %} 
+{% load static %} 
+{% load humanize %}
+
+{% block title %}
+    <title>รายละเอียดสินค้า</title>
+{% endblock title %} 
+
+{% block content %}
+<div class="row">
+    <div class="col-xl-12">
+        <div class="card">
+            <div class="card-header">
+                <h5>รายละเอียดข้อมูลการรับซื้อทอง</h5>
+            </div>
+            <div class="card-block table-border-style">
+                <div class="row">
+                    <div class="col-md-4 d-flex justify-content-center align-items-center">
+                        <div class="w-60 p-3">
+                            <img src="{{ purchaseDetail.picture.url }}" alt="profile image" class="img-fluid rounded">
+                        </div>
+                    </div>
+                    <div class="col-md-8">
+                        <table class="table">
+                            <tbody>
+                                <tr>
+                                    <th colspan="2" class="text-center">ข้อมูลลูกค้าที่ทำการรับซื้อ</th>
+                                </tr>
+                                <tr>
+                                    <th scope="row" class="ps-5">เลขบัตรประชาชน</th>
+                                    <td>{{ purchaseDetail.id_card }}</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row" class="ps-5">ชื่อ</th>
+                                    <td>{{ purchaseDetail.first_name }}</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row" class="ps-5">นามสกุล</th>
+                                    <td>{{ purchaseDetail.last_name }}</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row" class="ps-5">เบอร์โทร</th>
+                                    <td>{{ purchaseDetail.phone_number }}</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row" class="ps-5">ที่อยู่</th>
+                                    <td>{{ purchaseDetail.address }}</td>
+                                </tr>
+                                <tr>
+                                    <th colspan="2" class="ps-5 text-center">ข้อมูลสินค้าที่รับซื้อ</th>
+                                </tr>
+                                <tr>
+                                    <th scope="row" class="ps-5">ประเภทสินค้า</th>
+                                    <td>{{ purchaseDetail.gold_type }}</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row" class="ps-5">จำนวน</th>
+                                    <td>{{ purchaseDetail.quantity }} ชิ้น</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row" class="ps-5">น้ำหนัก</th>
+                                    <td>{{ purchaseDetail.weight | floatformat:2 | intcomma }} กรัม</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row" class="ps-5">ราคาทองที่รับซื้อ</th>
+                                    <td>{{ purchaseDetail.gold_price | floatformat:2 | intcomma }} บาท</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <div class="row">
+                            <div class="col-12 col-sm-12">
+                                <span>วันที่: {{ purchaseDetail.get_date }}</span>
+                                <span>เวลา: {{ purchaseDetail.get_time }} น.</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock content %}

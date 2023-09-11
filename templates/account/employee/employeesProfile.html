@@ -1,0 +1,66 @@
+{% extends 'components/base.html' %} 
+{% load static %} 
+
+{% block title %}
+    <title>ข้อมูลพนักงาน</title>
+{% endblock title %}
+
+{% block content %}
+<div class="row">
+    <div class="col-xl-12">
+        <div class="card">
+            <div class="card-header">
+                <h5>รายละเอียดข้อมูลพนักงาน</h5>
+            </div>
+            <div class="card-block table-border-style">
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="d-flex align-items-center justify-content-center flex-column">
+                            <div class="w-60 p-3">
+                                <img src="{{ employees.profile1.url }}" alt="profile image" class="img-fluid rounded">
+                            </div>
+                            <div class="w-60 p-3">
+                                <img src="{{ employees.profile2.url }}" alt="profile image" class="img-fluid rounded">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-8">
+                        <table class="table">
+                            <tbody>
+                                <tr>
+                                    <th scope="row" class="ps-5">เลขประจำตัวประชาชน</th>
+                                    <td>{{ employees.id }}</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row" class="ps-5">ชื่อ</th>
+                                    <td>{{ employees.first_name }}</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row" class="ps-5">นามสกุล</th>
+                                    <td>{{ employees.last_name }}</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row" class="ps-5">เพศ</th>
+                                    <td>{{ employees.gender }}</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row" class="ps-5">วันเกิด</th>
+                                    <td>{{ employees.birthdate }}</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row" class="ps-5">เบอร์โทร</th>
+                                    <td>{{ employees.phone_number }}</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row" class="ps-5">ที่อยู่</th>
+                                    <td style="white-space: pre-wrap;">{{ employees.address }}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock content %}

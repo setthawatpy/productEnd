@@ -1,0 +1,209 @@
+{% extends 'components/base.html' %} 
+{% load static %} 
+{% load humanize %}
+
+{% block title %}
+  <title>ตะกร้าสินค้า</title>
+{% endblock title %} 
+
+{% block content %}
+<div class="container">
+  <section class="breadcrumbs-section">
+    <div class="container mt-3">
+        <div class="row">
+            <div class="col-12">
+            <h2>ตะกร้าสินค้า / Shop Cart</h2>
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="{% url 'home' %}">Home</a></li>
+                <li class="breadcrumb-item active">Shop Cart</li>
+            </ol>
+            </div>
+        </div>
+    </div>
+  </section>
+  <div class="row">
+    <div class="col-12">
+      <table class="table-cart">
+        <thead class="table-thead">
+          <tr class="table-tr">
+            <th class="table-th" scope="col">
+              <input type="checkbox" id="selectAllCheckbox">
+              <label for="selectAllCheckbox"></label>
+            </th>
+            <th class="table-th" colspan="2">รายละเอียดสินค้า</th>
+            <th class="table-th" scope="col">ราคา</th>
+            <th class="table-th" scope="col">จำนวน</th>
+            <th class="table-th" scope="col">ค่ากำเหน็ด</th>
+            <th class="table-th" scope="col">รวมทั้งหมด</th>
+            <th class="table-th" scope="col">Clear Remove</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="table-tr">
+            <td class="table-td" data-label="เลือกสินค้า">
+              <input type="checkbox" class="table-checkbox">
+            </td>
+            <td class="table-td" data-label="ภาพสินค้า">
+              <a href="#">
+                <img
+                  class="card-img-top mb-5 mb-md-0"
+                  src="{% static 'category/catalog-1.jpg' %}"
+                  style="width: 100px; height: 100px">
+              </a>
+            </td>
+            <td class="table-td" data-label="รายละเอียดสินค้า">
+              Lorem ipsum dolor sit amet.
+            </td>
+            <td class="table-td" data-label="ราคา">1000</td>
+            <td class="table-td" data-label="จำนวน">
+              <input
+                type="number"
+                name="quantity"
+                value="1"
+                class="form-control"
+                min="0"
+                max="9999"
+                style="max-width: 4rem">
+            </td>
+            <td class="table-td" data-label="ค่ากำเหน็ด">500</td>
+            <td class="table-td" data-label="รวมทั้งหมด">1500</td>
+            <td class="table-td" data-label="Clear Remove">
+              <a href="#"><i class="fa-solid fa-trash text-danger"></i></a>
+            </td>
+          </tr>
+          <tr class="table-tr">
+            <td class="table-td" data-label="เลือกสินค้า">
+              <input type="checkbox" class="table-checkbox" />
+            </td>
+            <td class="table-td" data-label="ภาพสินค้า">
+              <a href="#">
+                <img
+                  class="card-img-top mb-5 mb-md-0"
+                  src="{% static 'category/catalog-1.jpg' %}"
+                  style="width: 100px; height: 100px">
+              </a>
+            </td>
+            <td class="table-td" data-label="รายละเอียดสินค้า">
+              Lorem ipsum dolor sit amet.
+            </td>
+            <td class="table-td" data-label="ราคา">1000</td>
+            <td class="table-td" data-label="จำนวน">
+              <input
+                type="number"
+                name="quantity"
+                value="1"
+                class="form-control"
+                min="0"
+                max="9999"
+                style="max-width: 4rem">
+            </td>
+            <td class="table-td" data-label="ค่ากำเหน็ด">500</td>
+            <td class="table-td" data-label="รวมทั้งหมด">1500</td>
+            <td class="table-td" data-label="Clear Remove">
+              <a href="#"><i class="fa-solid fa-trash text-danger"></i></a>
+            </td>
+          </tr>
+          <tr class="table-tr">
+            <td class="table-td" data-label="เลือกสินค้า">
+              <input type="checkbox" class="table-checkbox" />
+            </td>
+            <td class="table-td" data-label="ภาพสินค้า">
+              <a href="#">
+                <img
+                  class="card-img-top mb-5 mb-md-0"
+                  src="{% static 'category/catalog-1.jpg' %}"
+                  style="width: 100px; height: 100px">
+              </a>
+            </td>
+            <td class="table-td" data-label="รายละเอียดสินค้า">
+              Lorem ipsum dolor sit amet.
+            </td>
+            <td class="table-td" data-label="ราคา">1000</td>
+            <td class="table-td" data-label="จำนวน">
+              <input
+                type="number"
+                name="quantity"
+                value="1"
+                class="form-control"
+                min="0"
+                max="9999"
+                style="max-width: 4rem">
+            </td>
+            <td class="table-td" data-label="ค่ากำเหน็ด">500</td>
+            <td class="table-td" data-label="รวมทั้งหมด">1500</td>
+            <td class="table-td" data-label="Clear Remove">
+              <a href="#"><i class="fa-solid fa-trash text-danger"></i></a>
+            </td>
+          </tr>
+          <tr class="table-tr">
+            <td class="table-td" data-label="เลือกสินค้า">
+              <input type="checkbox" class="table-checkbox">
+            </td>
+            <td class="table-td" data-label="ภาพสินค้า">
+              <a href="#">
+                <img
+                  class="card-img-top mb-5 mb-md-0"
+                  src="{% static 'category/catalog-1.jpg' %}"
+                  style="width: 100px; height: 100px">
+              </a>
+            </td>
+            <td class="table-td" data-label="รายละเอียดสินค้า">
+              Lorem ipsum dolor sit amet.
+            </td>
+            <td class="table-td" data-label="ราคา">1000</td>
+            <td class="table-td" data-label="จำนวน">
+              <input
+                type="number"
+                name="quantity"
+                value="1"
+                class="form-control"
+                min="0"
+                max="9999"
+                style="max-width: 4rem">
+            </td>
+            <td class="table-td" data-label="ค่ากำเหน็ด">500</td>
+            <td class="table-td" data-label="รวมทั้งหมด">1500</td>
+            <td class="table-td" data-label="Clear Remove">
+              <a href="#"><i class="fa-solid fa-trash text-danger"></i></a>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <button class="btn btn-danger" id="deleteSelectedBtn">ลบที่เลือก</button>
+    </div>
+  </div>
+</div>
+
+{% block js %}
+<script>
+  var selectAllCheckbox = document.getElementById("selectAllCheckbox");
+  var deleteSelectedBtn = document.getElementById("deleteSelectedBtn");
+  var checkboxes = document.getElementsByClassName("table-checkbox");
+
+  selectAllCheckbox.addEventListener('change', function () {
+      for (var i = 0; i < checkboxes.length; i++) {
+          checkboxes[i].checked = selectAllCheckbox.checked;
+      }
+  });
+
+  deleteSelectedBtn.addEventListener('click', function () {
+      var table = document.getElementsByClassName("table-cart")[0];
+      var rows = table.querySelectorAll("tbody tr");
+
+      for (var i = rows.length - 1; i >= 0; i--) {
+          var checkbox = rows[i].querySelector('input[type="checkbox"]');
+
+          if (checkbox.checked) {
+              rows[i].remove();
+          }
+      }
+
+      // Check if there are remaining rows
+      var remainingRows = table.getElementsByTagName("tr");
+      if (remainingRows.length === 1) { // Exclude the table header row
+          selectAllCheckbox.checked = false;
+      }
+  });
+</script>
+{% endblock js %}
+{% endblock %}

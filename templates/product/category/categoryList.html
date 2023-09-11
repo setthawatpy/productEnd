@@ -1,0 +1,146 @@
+{% extends 'components/base.html' %} 
+{% load static %} 
+
+{% block title %}
+<title>การจัดการหมวดหมู่สินค้า</title>
+{% endblock title %} 
+
+{% block content %}
+<div class="row">
+    <div class="col-xl-12">
+        <div class="card">
+            <div class="card-header">
+                <h5>ตารางรายการหมวดหมู่สินค้า / Category List Table</h5>
+            </div>
+            <div class="d-flex justify-content-between align-items-center mt-5">
+                <div class="col-lg-3 px-4">
+                    <a href="{% url 'createCategory' %}" class="btn btn-primary btn-block">
+                        <i class="fa-solid fa-plus"></i>เพิ่มหมวดหมู่สินค้า
+                    </a>
+                </div>
+                <form action="{% url 'search_category' %}">
+                    <div class="input-group">
+                        <input class="form-control" type="search" name="search" placeholder="ป้อนชื่อหมวดหมู่สินค้าที่ต้องการค้นหา" required>
+                        <button type="submit" class="btn btn-primary">ค้นหา</button>
+                    </div>
+                </form>
+                <h6 class="mb-0 f-16 px-5 text-end">{{ count }} รายการ</h6>
+            </div>
+            <div class="card-block table-border-style">
+                <div class="table-responsive">
+                    <table class="table table-hover">
+                        <thead class="table-dark text-center">
+                            <tr>
+                                <th>ลำดับ</th>
+                                <th>ชื่อหมวดหมู่</th>
+                                <th>แอ็กชัน</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for categories in category %}
+                                <tr>
+                                    <th scope="row" class="text-center">{{ forloop.counter }}</th>
+                                    <td>{{ categories.title }}</td>
+                                    <td>
+                                        <div class="d-flex justify-content-center">
+                                            <a href="{% url 'editCategory' categories.id %}">
+                                                <i class="fa-solid fa-pen-to-square btn btn-warning"></i>
+                                            </a>
+                                            <a href="#" onclick="alertConfirmed('{{ categories.id }}'); return false;">
+                                                <i class="fa-solid fa-trash btn btn-danger"></i>
+                                            </a>
+                                        </div>
+                                    </td>
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>    
+</div>
+<script type="text/javascript">
+    function alertConfirmed(id) {
+        Swal.fire({
+            title: "ต้องการลบรายการนี้หรือไม่?",
+            text: "เมื่อรายการนี้ถูกลบ คุณจะไม่สามารถกู้คืนได้ !!",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "ตกลง",
+            cancelButtonText: "ยกเลิก",
+        }).then((result) => {
+            if (result.isConfirmed) {
+                $.ajax({
+                    url: "{% url 'deleteCategory' id=0 %}".replace("0", id),
+                    method: "POST",
+                    headers: { "X-CSRFToken": "{{ csrf_token }}" },
+                    success: function(response) {
+                        if (response.success) {
+                            Swal.fire(
+                                "ลบข้อมูลสำเร็จ!",
+                                "รายการนี้ถูกลบเรียบร้อย",
+                                "success"
+                            ).then(() => {
+                                window.location.reload();
+                            });
+                        } else {
+                            Swal.fire(
+                                "ไม่สามารถลบข้อมูลได้",
+                                response.message,
+                                "error"
+                            );
+                        }
+                    },
+                    error: function() {
+                        Swal.fire(
+                            "เกิดข้อผิดพลาด",
+                            "เกิดข้อผิดพลาดในการลบข้อมูล",
+                            "error"
+                        );
+                    }
+                });
+            } else if (result.dismiss === Swal.DismissReason.cancel) {
+                Swal.fire(
+                    "คำสั่งถูกยกเลิก",
+                    "ข้อมูลของคุณยังไม่ถูกลบ",
+                    "error"
+                );
+            }
+        });
+    }
+</script>
+{% comment %} <script type="text/javascript">
+    function alertConfirmed(id) {
+        Swal.fire({
+            title: "ต้องการลบรายการนี้หรือไม่ ?",
+            text: "เมื่อรายการนี้ถูกลบ คุณจะไม่สามารถกู้คืนได้ !!",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "ตกลง",
+            cancelButtonText: "ยกเลิก",
+        }).then((result) => {
+            if (result.isConfirmed) {
+                Swal.fire(
+                    "ลบข้อมูลสำเร็จ!",
+                    "รายการนี้ถูกลบเรียบร้อย",
+                    "success"
+                    ).then(() => {
+                        var deleteURL = "{% url 'deleteCategory' id=0 %}".replace("0", id);
+                        window.location.href = deleteURL;
+                    }
+                );
+            } else if (result.dismiss === Swal.DismissReason.cancel) {
+                Swal.fire(
+                    "คำสั่งถูกยกเลิก",
+                    "ข้อมูลของคุณยังไม่ถูกลบ",
+                    "error");
+            }
+        });
+    }
+</script> {% endcomment %}
+{% endblock content %}

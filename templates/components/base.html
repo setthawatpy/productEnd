@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% include 'components/head.html' %}
+    {% block extrastyle %}
+    
+    {% endblock extrastyle %}
+</head>
+<body>
+    {% block pre_loader %}
+    {% include 'components/pre-loader.html' %}
+    {% endblock pre_loader %}
+    
+    {% block sidebar %}
+        {% include 'components/sidebar.html' %}
+    {% endblock sidebar %}
+
+    {% block header %}
+        {% include 'components/navigation.html' %}
+    {% endblock header %}
+    
+    <div class="pcoded-main-container">
+        <div class="pcoded-wrapper">
+            <div class="pcoded-content">
+                <div class="pcoded-inner-content">
+                    {% block breadcrumbs %}
+                        {% include 'components/breadcrumb.html' %}
+                    {% endblock breadcrumbs %}
+                    <div class="main-body">
+                        <div class="page-wrapper">
+                            {% include 'components/messages.html' %}
+                        {% block content %}
+                        
+                        {% endblock content %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% include 'includes/scripts.html' %}
+    {% block extra_js %}
+    
+    {% endblock extra_js %}
+</body>
+</html>

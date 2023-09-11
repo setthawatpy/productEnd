@@ -1,0 +1,36 @@
+{% for message in messages %}
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script type="text/javascript">
+    {% if message.tags == 'SUCCESS' %}
+        Swal.fire(
+        '{{ message.tags }}',
+        '{{ message }}',
+        'success'
+        );
+    {% elif message.tags == 'INFO' %}
+        Swal.fire(
+        '{{ message.tags }}',
+        '{{ message }}',
+        'info'
+        );
+    {% elif message.tags == 'ERROR' %}
+        Swal.fire(
+        '{{ message.tags }}',
+        '{{ message }}',
+        'error'
+        );
+    {% elif message.tags == 'WARNING' %}
+        Swal.fire(
+        '{{ message.tags }}',
+        '{{ message }}',
+        'warning'
+        );
+    {% else %}
+        Swal.fire(
+        '{{ message.tags }}',
+        '{{ message }}',
+        'question'
+        );
+    {% endif %}
+</script>
+{% endfor %}

@@ -1,0 +1,11 @@
+pip install beautifulsoup4
+pip install Pillow
+pip install mysqlclient
+pip install requests
+pip install Django
+pip install django-dynamic-datatb
+pip install django-admin-datta
+pip install django-api-generator
+pip install python-dotenv
+pip install whitenoise
+pip install pytz

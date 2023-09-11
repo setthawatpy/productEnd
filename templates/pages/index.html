@@ -1,0 +1,377 @@
+{% extends 'components/base.html' %} 
+{% load static %}
+
+{% block breadcrumbs %}
+{% endblock breadcrumbs %}
+
+{% block content %}
+
+<!-- [ Main Content ] start -->
+<div class="row">
+    <!--[ daily sales section ] start-->
+    <div class="col-md-6 col-xl-4">
+        <div class="card daily-sales">
+            <div class="card-block">
+            <h6 class="mb-4 f-20">ทองคำแท่ง 96.5% (บาทละ)</h6>
+            <div class="row d-flex align-items-center">
+                <div class="col-5">
+                    <h3 class="f-w-300 d-flex align-items-center m-b-0">
+                        <i class="feather icon-arrow-up text-c-green f-30 m-r-10"></i><span class="text-success" id="buyign1"></span>
+                    </h3>
+                </div>
+                <div class="col-5">
+                    <h3 class="f-w-300 d-flex align-items-center m-b-0">
+                        <i class="feather icon-arrow-down text-c-red f-30 m-r-10"></i><span class="text-danger" id="selling1"></span>
+                    </h3>
+                </div>
+                <div class="col-2 text-right">
+                    <span class="text-success" id="price-color1">
+                        <i class="fa-solid fa-caret-up" id="price-icon1"></i>
+                            <span id="price-change1"></span>
+                    </span>
+                </div>
+            </div>
+            <div class="progress m-t-30" style="height: 7px;">
+                <div class="progress-bar progress-c-theme" role="progressbar" style="width: 50%;" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
+            </div>
+            </div>
+        </div>
+    </div>
+    <!--[ daily sales section ] end-->
+
+    <!--[ Monthly  sales section ] starts-->
+    <div class="col-md-6 col-xl-4">
+        <div class="card Monthly-sales">
+            <div class="card-block">
+                <h6 class="mb-4 f-20">ทองรูปพรรณ 96.5% (บาทละ)</h6>
+            <div class="row d-flex align-items-center">
+                <div class="col-5">
+                    <h3 class="f-w-300 d-flex align-items-center  m-b-0">
+                        <i class="feather icon-arrow-up text-c-green f-30 m-r-10"></i><span class="fw-bolder text-success" id="buyign2"></span>
+                    </h3>
+                </div>
+                <div class="col-5">
+                    <h3 class="f-w-300 d-flex align-items-center  m-b-0">
+                        <i class="feather icon-arrow-down text-c-red f-30 m-r-10"></i><span class="fw-bolder text-danger" id="selling2"></span>
+                    </h3>
+                </div>
+                <div class="col-2 text-right">
+                    <span class="text-success" id="price-color2">
+                        <i class="fa-solid fa-caret-up" id="price-icon2"></i>
+                            <span id="price-change2"></span>
+                    </span>
+                </div>
+            </div>
+            <div class="progress m-t-30" style="height: 7px;">
+                <div class="progress-bar progress-c-theme2" role="progressbar" style="width: 35%;"
+                aria-valuenow="35" aria-valuemin="0" aria-valuemax="100"></div>
+            </div>
+            </div>
+        </div>
+    </div>
+    <!--[ Monthly  sales section ] end-->
+
+    <!--[ year  sales section ] starts-->
+    <div class="col-md-12 col-xl-4">
+        <div class="card yearly-sales">
+            <div class="card-block">
+            <h6 class="mb-4 f-20">ทองคำแท่ง 99.99% (บาทละ)</h6>
+            <div class="row d-flex align-items-center">
+                <div class="col-5">
+                    <h3 class="f-w-300 d-flex align-items-center  m-b-0">
+                        <i class="feather icon-arrow-up text-c-green f-30 m-r-10"></i><span class="fw-bolder text-success" id="buyign3"></span>
+                    </h3>
+                </div>
+                <div class="col-5">
+                    <h3 class="f-w-300 d-flex align-items-center  m-b-0">
+                        <i class="feather icon-arrow-up text-c-green f-30 m-r-10"></i><span class="fw-bolder text-danger" id="selling3"></span>
+                    </h3>
+                </div>
+                <div class="col-2 text-right">
+                    <span class="text-success" id="price-color3">
+                        <i class="fa-solid fa-caret-up" id="price-icon3"></i>
+                            <span id="price-change3"></span>
+                    </span>
+                </div>
+            </div>
+            <div class="progress m-t-30" style="height: 7px;">
+                <div class="progress-bar progress-c-theme" role="progressbar" style="width: 70%;" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100"></div>
+            </div>
+            </div>
+        </div>
+    </div>
+    <!--[ year  sales section ] end-->
+
+    <!-- [ statistics year chart ] start -->
+    <div class="col-xl-4 col-md-6">
+        <div class="card card-event">
+            <div class="card-block">
+                <div class="row align-items-center justify-content-center">
+                    <div class="col">
+                        <h5 class="m-0 f-20">อัพเดตล่าสุด</h5>
+                    </div>
+                    {% comment %} <div class="col-auto">
+                        <label class="label theme-bg2 text-white f-14 f-w-400 float-right">34%</label>
+                    </div> {% endcomment %}
+                </div>
+                <h2 class="f-w-300">
+                    <sub class="text-muted f-20">ประจำวันที่: 
+                        <span id="currentdate"></span>
+                    </sub>
+                </h2>
+                <h2 class="f-w-300">
+                    <sub class="text-muted f-20">เวลา: 
+                        <span id="currentTime"></span>
+                    </sub>
+                </h2>
+                <h6 class="text-muted mt-4 mb-0">
+                    <span id="updateTime1"></span>
+                </h6>
+                <i class="fa-solid fa-calendar-days text-c-purple f-50"></i>
+            </div>
+        </div>
+        <div class="card">
+            <div class="card-block border-bottom">
+                <div class="row d-flex align-items-center">
+                    <div class="col-auto">
+                        <i class="fa-solid fa-square-dollar f-30 text-c-green"></i>
+                    </div>
+                    <div class="col">
+                        <h3 class="f-w-300">235</h3>
+                        <span class="d-block text-uppercase">TOTAL IDEAS</span>
+                    </div>
+                </div>
+            </div>
+            <div class="card-block">
+                <div class="row d-flex align-items-center">
+                    <div class="col-auto">
+                        <i class="feather icon-map-pin f-30 text-c-blue"></i>
+                    </div>
+                    <div class="col">
+                        <h3 class="f-w-300">26</h3>
+                        <span class="d-block text-uppercase">TOTAL LOCATIONS</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- [ statistics year chart ] end -->
+
+    <!--[ Recent Users ] start-->
+    <div class="col-xl-8 col-md-6">
+        <div class="card Recent-Users">
+            <div class="card-header">
+                <h4>กราฟราคาทองคำไทยจากสมาคมค้าทองคำ แบบ Real Time</h4>
+            </div>
+            <div class="card-block">
+                <script type="text/javascript">
+                    new TradingView.widget({
+                        height: 378,
+                        width: "100%",
+                        symbol: "OANDA:XAUUSD",
+                        interval: "1",
+                        timezone: "Asia/Bangkok",
+                        theme: "light",
+                        style: "1",
+                        locale: "th",
+                        toolbar_bg: "rgba(7, 55, 99, 1)",
+                        enable_publishing: !1,
+                        allow_symbol_change: !0,
+                        hideideas: !0,
+                    });
+                </script>
+            </div>
+        </div>
+    </div>
+    <!--[ Recent Users ] end-->
+
+    <!--[social-media section] start-->
+    <div class="col-md-12 col-xl-4">
+        <div class="card card-social">
+            <div class="card-block border-bottom">
+                <div class="row align-items-center justify-content-center">
+                    <div class="col-auto">
+                        <i class="fab fa-facebook-f text-primary f-36"></i>
+                    </div>
+                    <div class="col text-right">
+                        <h3>12,281</h3>
+                        <h5 class="text-c-green mb-0">+7.2% <span class="text-muted">Total Likes</span></h5>
+                    </div>
+                </div>
+            </div>
+            <div class="card-block">
+                <div class="row align-items-center justify-content-center card-active">
+                    <div class="col-6">
+                        <h6 class="text-center m-b-10"><span class="text-muted m-r-5">Target:</span>35,098</h6>
+                        <div class="progress">
+                            <div class="progress-bar progress-c-theme" role="progressbar" style="width:60%;height:6px;" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100"></div>
+                        </div>
+                        </div>
+                        <div class="col-6">
+                            <h6 class="text-center  m-b-10"><span class="text-muted m-r-5">Duration:</span>3,539</h6>
+                        <div class="progress">
+                            <div class="progress-bar progress-c-theme2" role="progressbar" style="width:45%;height:6px;" aria-valuenow="45" aria-valuemin="0" aria-valuemax="100"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6 col-xl-4">
+        <div class="card card-social">
+            <div class="card-block border-bottom">
+            <div class="row align-items-center justify-content-center">
+                <div class="col-auto">
+                <i class="fab fa-twitter text-c-blue f-36"></i>
+                </div>
+                <div class="col text-right">
+                <h3>11,200</h3>
+                <h5 class="text-c-purple mb-0">+6.2% <span class="text-muted">Total Likes</span>
+                </h5>
+                </div>
+            </div>
+            </div>
+            <div class="card-block">
+            <div class="row align-items-center justify-content-center card-active">
+                <div class="col-6">
+                <h6 class="text-center m-b-10"><span class="text-muted m-r-5">Target:</span>34,185</h6>
+                <div class="progress">
+                    <div class="progress-bar progress-c-green" role="progressbar" style="width:40%;height:6px;"
+                    aria-valuenow="40" aria-valuemin="0" aria-valuemax="100"></div>
+                </div>
+                </div>
+                <div class="col-6">
+                <h6 class="text-center  m-b-10"><span class="text-muted m-r-5">Duration:</span>4,567</h6>
+                <div class="progress">
+                    <div class="progress-bar progress-c-blue" role="progressbar" style="width:70%;height:6px;"
+                    aria-valuenow="70" aria-valuemin="0" aria-valuemax="100"></div>
+                </div>
+                </div>
+            </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6 col-xl-4">
+        <div class="card card-social">
+            <div class="card-block border-bottom">
+            <div class="row align-items-center justify-content-center">
+                <div class="col-auto">
+                <i class="fab fa-google-plus-g text-c-red f-36"></i>
+                </div>
+                <div class="col text-right">
+                <h3>10,500</h3>
+                <h5 class="text-c-blue mb-0">+5.9% <span class="text-muted">Total Likes</span></h5>
+                </div>
+            </div>
+            </div>
+            <div class="card-block">
+            <div class="row align-items-center justify-content-center card-active">
+                <div class="col-6">
+                <h6 class="text-center m-b-10"><span class="text-muted m-r-5">Target:</span>25,998</h6>
+                <div class="progress">
+                    <div class="progress-bar progress-c-theme" role="progressbar" style="width:80%;height:6px;"
+                    aria-valuenow="80" aria-valuemin="0" aria-valuemax="100"></div>
+                </div>
+                </div>
+                <div class="col-6">
+                <h6 class="text-center  m-b-10"><span class="text-muted m-r-5">Duration:</span>7,753</h6>
+                <div class="progress">
+                    <div class="progress-bar progress-c-theme2" role="progressbar" style="width:50%;height:6px;"
+                    aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
+                </div>
+                </div>
+            </div>
+            </div>
+        </div>
+    </div>
+    <!--[social-media section] end-->
+</div>
+<!-- [ Main Content ] end -->
+{% block js %}
+<script type="text/javascript">
+    // เรียกใช้ฟังก์ชัน
+    jQuery(document).ready(function () {
+        getprice();
+        getprice99();
+        updateTime()
+        //alert("Load Data Success")
+        //console.log("Load Data Success")
+    })
+        // เรียกใช้ฟังก์ชันอัปเดตเวลาทุกๆ 1 วินาที
+    setInterval(function () {
+        getprice();
+        getprice99();
+        updateTime();
+    }, 1000);
+    
+    function updateTime() {
+        var dt = new Date();
+        var time =
+        convertToTwoDigit(dt.getHours()) +
+        ":" +
+        convertToTwoDigit(dt.getMinutes()) +
+        ":" +
+        convertToTwoDigit(dt.getSeconds());
+        document.getElementById("currentTime").innerText = time + " น.";
+    }
+    
+    function convertToTwoDigit(num) {
+        return ("0" + num).slice(-2);
+    }
+    
+    function getprice() {
+        var url = "https://apicheckprice.huasengheng.com/api/values/getprice/";
+        //alert("Load Data Success")
+        //console.log("Load Data Success")
+        jQuery.ajax({
+        type: "GET",
+        url: url,
+        dataType: "json",
+        success: function(data) {
+            jQuery.each(data, function (key, value) {
+            if (value.GoldType == "REF") {
+                jQuery("#buyign1").text(value.Buy);
+                jQuery("#selling1").text(value.Sell);
+                jQuery("#price-change1").text(value.BuyChange);
+                jQuery("#updateTime1").text(value.StrTimeUpdate);
+                if (value.BuyChange < 0) {
+                    jQuery("#price-icon1").removeClass("fa-caret-up");
+                    jQuery("#price-icon1").addClass("fa-caret-down");
+                    jQuery("#price-color1").removeClass("text-success");
+                    jQuery("#price-color1").addClass("text-danger");
+                }
+            } else if (value.GoldType == "JEWEL") {
+                jQuery("#buyign2").text(value.Buy);
+                jQuery("#selling2").text(value.Sell);
+                jQuery("#price-change2").text(value.BuyChange);
+                jQuery("#updateTime2").text(value.StrTimeUpdate);
+                if (value.BuyChange < 0) {
+                    jQuery("#price-icon2")
+                    .removeClass("fa-caret-up")
+                    .addClass("fa-caret-down");
+                    jQuery("#price-color2")
+                    .removeClass("text-success")
+                    .addClass("text-danger");
+                }
+            }
+            });
+        }
+        });
+    }
+    function getprice99() {
+        var url = "https://apigoldprice99.huasengheng.com/api/values";
+        jQuery.ajax({
+            type: "GET",
+            url: url,
+            dataType: "json",
+            success: function (data) {
+                jQuery("#currentdate").text(data.Date);
+                jQuery("#buyign3").text(data.Buy);
+                jQuery("#selling3").text(data.Sell);
+            },
+            error: function (d) {},
+    });
+}
+</script>
+{% endblock js %}
+{% endblock content %}

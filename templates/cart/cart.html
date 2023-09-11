@@ -1,0 +1,125 @@
+{% extends 'components/base.html' %} 
+{% load static %}
+{% load humanize %}
+
+{% block title %}
+    <title>ตะกร้าสินค้า</title>
+{% endblock title %} 
+
+{% block content %}
+<div class="container">
+    {% if not cartItem %}
+        <section class="container my-5">
+            <div class="text-center">
+                <svg xmlns="http://www.w3.org/2000/svg" class="img-fluid" style="width: 200px; height: 200px; margin-left: auto; margin-right: auto" fill="currentColor" class="bi bi-cart" viewBox="0 0 16 16">
+                    <path d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .491.592l-1.5 8A.5.5 0 0 1 13 12H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5zM3.102 4l1.313 7h8.17l1.313-7H3.102zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2zm7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"/>
+                </svg>
+                <br>
+                <h1 class="my-4"><strong>ไม่มีสินค้าในตะกร้า</strong></h1>
+                <div class="mbr-section-btn pt-3">
+                    <a href="{% url 'category' %}" class="btn btn-primary display-4">
+                        <i class="fa-solid fa-bag-shopping"></i>กลับหน้าหมวดหมู่สินค้า
+                    </a>
+                </div>
+                <br><br>
+            </div>
+        </section>
+    {% else %}
+        <div class="container">
+            <div class="card Monthly-sales">
+                <div class="card-block px-5">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <h6 class="mb-4 f-20">รายการขายทองคำ</h6>
+                        <h6 class="mb-0 f-20 text-end">{{ counter }} รายการ</h6>
+                    </div>
+                    <div class="table-responsive">
+                        <table class="table">
+                            <thead class="text-center">
+                                <tr>
+                                    <th colspan="2">รายละเอียดสินค้า</th>
+                                    <th scope="col">จำนวน</th>
+                                    <th scope="col">ค่ากำเหน็ด</th>
+                                    <th scope="col">ราคา</th>
+                                    <th scope="col">รวมทั้งหมด</th>
+                                    <th scope="col">แอ็กชัน</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for item in cartItem %}
+                                    <tr>
+                                        <th scope="row">
+                                            <img src="{{ item.product.picture1.url }}" style="width: 100px; height: 100px">
+                                        </th>
+                                        <td>{{ item.product.title }}</td>
+                                        <td class="text-center">{{ item.quantity }}</td>
+                                        <td class="text-center">{{ item.sub_charge  | floatformat:2 | intcomma }}</td>
+                                        <td class="text-center">{{ item.product.price | floatformat:2 | intcomma }}</td>
+                                        <td class="text-center">{{ item.sub_total  | floatformat:2 | intcomma }}</td>
+                                        <td class="text-center">
+                                            <a href="{% url 'removeCart' item.product.id %}">
+                                                <i class="fa-solid fa-trash btn btn-danger"></i>
+                                            </a>
+                                        </td>
+                                    </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                        <hr class="my-4">
+                    </div>
+                    <h4 class="fw-bold f-18 mb-5 mt-0 pt-0">สรุปคำสั่งซื้อ</h4>
+                    <div class="d-flex justify-content-between mb-3">
+                        <h5 class="f-16">รวมค่ากำเหน็ดทั้งหมด</h5>
+                        <h5>{{ charge | floatformat:2 | intcomma }} บาท</h5>
+                    </div>
+                    <div class="d-flex justify-content-between mb-3">
+                        <h5 class="f-16">รวมค่าสินค้า</h5>
+                        <h5>{{ total | floatformat:2 | intcomma }} บาท</h5>
+                    </div>
+                    <div class="d-flex justify-content-between mb-3">
+                        <h5 class="f-16">ยอดชำระเงินทั้งหมด</h5>
+                        <h5>{{ netTotal | floatformat:2 | intcomma }} บาท</h5>
+                    </div>
+                    <a href="{% url 'order' %}" method="POST">
+                        <button type="button" class="btn btn-success w-100">ดำเนินการ</button>
+                    </a>
+                </div>
+            </div>
+        </div>
+    {% endif %}
+</div>
+{% comment %} <script>
+    {% for item in cartItem %}
+    const minusBtn_{{ item.id }} = document.getElementById('minus-btn_{{ item.id }}');
+    const plusBtn_{{ item.id }} = document.getElementById('plus-btn_{{ item.id }}');
+    const quantityInput_{{ item.id }} = document.getElementById('quantity-input_{{ item.id }}');
+
+    minusBtn_{{ item.id }}.addEventListener('click', () => {
+        let currentValue = parseInt(quantityInput_{{ item.id }}.value, 10);
+        if (currentValue > 1) {
+            quantityInput_{{ item.id }}.value = currentValue - 1;
+        }
+    });
+
+    plusBtn_{{ item.id }}.addEventListener('click', () => {
+        let currentValue = parseInt(quantityInput_{{ item.id }}.value, 10);
+        quantityInput_{{ item.id }}.value = currentValue + 1;
+    });
+    {% endfor %}
+
+    document.addEventListener('DOMContentLoaded', function () {
+        const refreshButton = document.getElementById('refresh-button');
+        
+        refreshButton.addEventListener('click', function () {
+            location.reload(); // รีเฟรชหน้าเว็บ
+        });
+    });
+</script> {% endcomment %}
+
+<style>
+    input[type="number"]::-webkit-inner-spin-button,
+    input[type="number"]::-webkit-outer-spin-button {
+        -webkit-appearance: none;
+        margin: 0;
+    }
+</style>
+{% endblock %}

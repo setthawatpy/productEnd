@@ -1,0 +1,98 @@
+{% extends 'components/base.html' %} 
+{% load static %} 
+{% load humanize %}
+
+{% block title %}
+    <title>รายการรับซื้อทอง</title>
+{% endblock title %} 
+
+{% block content %}
+<div class="row">
+    <div class="col-xl-12">
+        <div class="card">
+            <div class="card-header">
+                <h5>ตารางรายการรับซื้อทอง / Gold Purchase List Table</h5>
+            </div>
+            <div class="d-flex justify-content-between align-items-center mt-5">
+                <div class="col-lg-3 px-4">
+                    <a href="{% url 'createPurchases' %}" class="btn btn-primary btn-block">
+                        <i class="fa-solid fa-plus"></i>เพิ่มรายการรับซื้อทอง
+                    </a>
+                </div>
+                <form action="{% url 'search_customers' %}">
+                    <div class="input-group">
+                        <input class="form-control" type="search" name="search" placeholder="ป้อนชื่อลูกค้าที่ต้องการค้นหา" required>
+                        <button type="submit" class="btn btn-primary">ค้นหา</button>
+                    </div>
+                </form>
+                <h6 class="mb-0 f-16 px-5 text-end">{{ count }} รายการ</h6>
+            </div>
+            <div class="card-block table-border-style">
+                <div class="table-responsive">
+                    <table class="table table-hover">
+                        <thead class="table-dark text-center">
+                            <tr>
+                                <th>วันที่รับซื้อ</th>
+                                <th>เวลาที่รับซื้อ</th>
+                                <th>แอ็กชัน</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for detail in purchases %}
+                                <tr>
+                                    <td class="text-center">{{ detail.get_date }}</td>
+                                    <td class="text-center">{{ detail.get_time }}</td>
+                                    <td class="text-center">
+                                        <a href="{% url 'purchaseReceipt' detail.id %}">
+                                            <i class="fa-solid fa-file-invoice btn btn-primary"></i>
+                                        </a>
+                                        <a href="{% url 'editPurchases' detail.id %}">
+                                            <i class="fa-solid fa-pen-to-square btn btn-warning"></i>
+                                        </a>
+                                        <a href="#" onclick="alertConfirmed('{{ detail.id }}'); return false;">
+                                            <i class="fa-solid fa-trash btn btn-danger"></i>
+                                        </a>
+                                        {% comment %} <a href="{% url 'purchasesDetail' detail.id %}">
+                                            <i class="fa-solid fa-eye btn btn-light"></i>
+                                        </a> {% endcomment %}
+                                    </td>
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+    function alertConfirmed(id) {
+        Swal.fire({
+        title: "ต้องการลบรายการนี้หรือไม่ ?",
+        text: "เมื่อรายการนี้ถูกลบ คุณจะไม่สามารถกู้คืนได้ !!",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "ตกลง",
+        cancelButtonText: "ยกเลิก",
+        }).then((result) => {
+            if (result.isConfirmed) {
+                Swal.fire(
+                    "ลบข้อมูลสำเร็จ", 
+                    "รายการนี้ถูกลบเรียบร้อย", 
+                    "success"
+                    ).then(() => {
+                    var deleteURL = "{% url 'deletePurchases' id=0 %}".replace("0", id);
+                    window.location.href = deleteURL;
+                });
+            } else if (result.dismiss === Swal.DismissReason.cancel) {
+                Swal.fire("คำสั่งถูกยกเลิก", 
+                    "ข้อมูลของคุณยังไม่ถูกลบ", 
+                    "error"
+                );
+            }
+        });
+    }
+</script>
+{% endblock content %}

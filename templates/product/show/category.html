@@ -1,0 +1,236 @@
+{% extends 'components/base.html' %} 
+{% load static %} 
+
+{% block title %}
+    <title>สินค้าทองคำ</title>
+{% endblock title %} 
+
+{% block content %}
+<div class="container">
+    <div class="row">
+        <div class="col-lg-6 col-md-8 mx-auto text-center py-5">
+            <h1 class="fw-light">สินค้าทองคำ</h1>
+            <p class="lead text-body-secondary">
+            ทองคำ ที่เป็นแร่โลหะชนิดหนึ่งที่มีสีเหลืองทองที่สื่อและให้ความรู้สึกถึงความลักชู
+            หรูหรา มีลักษณะเงางาม มันวาว และมีความคงทนแข็งแรง ยากต่อการบุบสลาย
+            จึงปฏิเสธไม่ได้เลยว่าทำไมทองถึงมีมูลค่าสูงมาตั้งแต่ในอดีตจนถึงปัจจุบัน
+            </p>
+        </div>
+    </div>
+    <div class="album py-5 bg-body-tertiary">
+        <div class="container">
+            <div class="row row-cols-1 row-cols-sm-1 row-cols-md-2 row-cols-lg-3 g-5">
+                <div class="col-12 col-sm-3">
+                    <div class="card card-category">
+                        <a href="{% url 'goldRing' %}" class="card-image text-decoration-none">
+                            <img src="{% static 'assets/images/category/catalog-1.jpg' %}"alt="p1" class="img-fluid">
+                            <p class="card_title text-light">แหวนทอง</p>
+                        </a>
+                    </div>
+                </div>
+                <div class="col-12 col-sm-3">
+                    <div class="card card-category">
+                        <a href="{% url 'goldBracelet' %}" class="card-image text-decoration-none">
+                            <img src="{% static 'assets/images/category/catalog-2.jpg' %}"alt="p2" class="img-fluid">
+                            <p class="card_title text-light">สร้อยข้อมือ</p>
+                        </a>
+                    </div>
+                </div>
+                <div class="col-12 col-sm-3">
+                    <div class="card card-category">
+                        <a href="{% url 'goldNecklace' %}" class="card-image text-decoration-none">
+                            <img src="{% static 'assets/images/category/catalog-3.jpg' %}"alt="p3" class="img-fluid">
+                            <p class="card_title text-light">สร้อยคอ</p>
+                        </a>
+                    </div>
+                </div>
+                <div class="col-12 col-sm-3">
+                    <div class="card card-category">
+                        <a href="{% url 'goldBangle' %}" class="card-image text-decoration-none">
+                            <img src="{% static 'assets/images/category/catalog-4.jpg' %}"alt="p4" class="img-fluid">
+                            <p class="card_title text-light">กำไล</p>
+                        </a>
+                    </div>
+                </div>
+                <div class="col-12 col-sm-3">
+                    <div class="card card-category">
+                        <a href="{% url 'goldEarrings' %}" class="card-image text-decoration-none">
+                            <img src="{% static 'assets/images/category/catalog-5.jpg' %}"alt="p5" class="img-fluid">
+                            <p class="card_title text-light">ต่างหู</p>
+                        </a>
+                    </div>
+                </div>
+                <div class="col-12 col-sm-3">
+                    <div class="card card-category">
+                        <a href="{% url 'goldBars' %}" class="card-image text-decoration-none">
+                            <img src="{% static 'assets/images/category/catalog-6.jpg' %}"alt="p6" class="img-fluid">
+                            <p class="card_title text-light">ทองคำแท่ง</p>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="l-container">
+    <div class="b-game-card">
+        <a href="{% url 'goldRing' %}" class="card-image text-decoration-none">
+            <div class="b-game-card__cover">
+                <img src="{% static 'assets/images/category/catalog-1.jpg' %}"alt="p1" class="img-fluid">
+            </div>
+        </a>
+    </div>
+    <div class="b-game-card">
+        <a href="{% url 'goldBracelet' %}" class="card-image text-decoration-none">
+            <div class="b-game-card__cover">
+                <img src="{% static 'assets/images/category/catalog-2.jpg' %}"alt="p2" class="img-fluid">
+            </div>
+        </a>
+    </div>
+    <div class="b-game-card">
+        <a href="{% url 'goldNecklace' %}" class="card-image text-decoration-none">
+            <div class="b-game-card__cover">
+                <img src="{% static 'assets/images/category/catalog-3.jpg' %}"alt="p3" class="img-fluid">
+            </div>
+        </a>
+    </div>
+    <div class="b-game-card">
+        <a href="{% url 'goldBangle' %}" class="card-image text-decoration-none">
+            <div class="b-game-card__cover">
+                <img src="{% static 'assets/images/category/catalog-4.jpg' %}"alt="p6" class="img-fluid">
+            </div>
+        </a>
+    </div>
+    <div class="b-game-card">
+        <a href="{% url 'goldBangle' %}" class="card-image text-decoration-none">
+            <div class="b-game-card__cover">
+                <img src="{% static 'assets/images/category/catalog-5.jpg' %}"alt="p6" class="img-fluid">
+            </div>
+        </a>
+    </div>
+    <div class="b-game-card">
+        <a href="{% url 'goldBars' %}" class="card-image text-decoration-none">
+            <div class="b-game-card__cover">
+                <img src="{% static 'assets/images/category/catalog-6.jpg' %}"alt="p6" class="img-fluid">
+            </div>
+        </a>
+    </div>
+</div>
+<style>
+    .l-container {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        grid-gap: 30px;
+        width: 100%;
+        {% comment %} max-width: 1200px; {% endcomment %}
+        max-width: auto;
+        padding: 30px;
+    }
+    
+    @media screen and (max-width: 760px) {
+        .l-container {
+            grid-template-columns: repeat(2, 1fr);
+        }
+    }
+    
+    .b-game-card {
+        position: relative;
+        z-index: 1;
+        width: 100%;
+        padding-bottom: 150%;
+        perspective: 1000px;
+    }
+    
+    .b-game-card__cover {
+        position: absolute;
+        z-index: 1;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 80%;
+        overflow: hidden;
+        perspective-origin: 50% 50%;
+        transform-style: preserve-3d;
+        transform-origin: top center;
+        will-change: transform;
+        transform: skewX(.001deg);
+        transition: transform .35s ease-in-out;
+    }
+    
+      /* Gloss */
+    
+    .b-game-card__cover::after {
+        display: block;
+        content: '';
+        position: absolute;
+        z-index: 100;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(226deg, rgba(255, 255, 255, 0.4) 0%, rgba(255, 255, 255, 0.4) 35%, rgba(255, 255, 255, 0.2) 42%, rgba(255, 255, 255, 0) 60%);
+        transform: translateY(-20%);
+        will-change: transform;
+        transition: transform .65s cubic-bezier(0.18, 0.9, 0.58, 1);
+    }
+    
+    .b-game-card:hover .b-game-card__cover {
+        transform: rotateX(7deg) translateY(-6px);
+    }
+    
+    .b-game-card:hover .b-game-card__cover::after {
+        transform: translateY(0%);
+    }
+    
+      /* Shadows */
+      
+    .b-game-card::before {
+        display: block;
+        content: '';
+        position: absolute;
+        top: 5%;
+        left: 5%;
+        width: 90%;
+        height: 90%;
+        background: rgba(var(--c_0), 0.5);
+        box-shadow: 0 6px 12px 12px rgba(var(--c_0), 0.4);
+        will-change: opacity;
+        transform-origin: top center;
+        transform: skewX(.001deg);
+        transition: transform .35s ease-in-out, opacity .5s ease-in-out;
+    }
+    
+    .b-game-card:hover::before {
+        opacity: 0.6;
+        transform: rotateX(7deg) translateY(-6px) scale(1.05);
+    }
+    .card-category {
+        margin: 30px auto;
+        width: 300px;
+        height: 300px;
+        border-radius: 40px;
+        box-shadow: 5px 5px 30px 7px rgba(0, 0, 0, 0.25), -5px -5px 30px 7px rgba(0, 0, 0, 0.22);
+        cursor: pointer;
+        transition: 0.4s; }
+    .card-category:hover {
+        transform: scale(1.2, 1.2);
+        box-shadow: 5px 5px 30px 15px rgba(0, 0, 0, 0.25), -5px -5px 30px 15px rgba(0, 0, 0, 0.22); }
+    .card-category .card-image {
+        width: inherit;
+        height: inherit;
+        border-radius: 40px; }
+    .card-category .img-fluid {
+        width: inherit;
+        height: inherit;
+        border-radius: 40px;
+        object-fit: cover; }
+    .card-category .card_title {
+        text-align: center;
+        border-radius: 0px 0px 40px 40px;
+        font-weight: bold;
+        font-size: 30px;
+        margin-top: -160px;
+        height: 40px; }
+</style>
+{% endblock content %}
