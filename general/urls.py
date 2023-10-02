@@ -6,6 +6,13 @@ from .views import tables
 
 urlpatterns = [
     path('', views.index, name='index'),
+    path('createShop', views.createShop, name='createShop'),
+    path('editShop/<id>', views.editShop, name='editShop'),
+    path('deleteShop/<id>', views.deleteShop, name='deleteShop'),
+    path('shopList', views.shopList, name='shopList'),
+    path('search_shop', views.search_shop, name='search_shop'),
+    
+    
     path('test/', views.test, name='test'),
     path('tables/', tables, name='tables'),
 

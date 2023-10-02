@@ -1,0 +1,54 @@
+
+{% extends 'components/base.html' %} 
+{% load static %} 
+{% load humanize %}
+
+{% block content %}
+<div class="row">
+    <div class="col-xl-12">
+        <div class="card">
+            <div class="card-header">
+                <h5>ตารางรายการสัญญาขายฝากทองคำ / Gold contracts List Table</h5>
+            </div>
+            <div class="card-block">
+                <div class="table-responsive">
+                    <table class="table table-hover table-bordered">
+                        <thead class="table-dark text-center">
+                            <tr>
+                                <tr>
+                                    <th>งวดที่</th>
+                                    <th>วันครบกำหนด</th>
+                                    <th>ยอดหนี้</th>
+                                    <th>ผ่อนชำระรายเดือน</th>
+                                    <th>ดอกเบี้ย / เดือน</th>
+                                    <th>เงินต้น / เดือน</th>
+                                    <th>เงินต้นคงเหลือ</th>
+                                </tr>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for repme in repayment_data %}
+                                <tr>
+                                    <td class="text-center">{{ repme.month }}</td>
+                                    <td class="text-center">{{ repme.due_date }}</td>
+                                    <td class="text-center">{{ repme.get_monthly_payment }}</td>
+                                    <td class="text-right">{{ repme.monthly_installments | floatformat:2 | intcomma }}</td>
+                                    <td class="text-right">{{ repme.monthly_interest | floatformat:2 | intcomma }}</td>
+                                    <td class="text-right">{{ repme.monthly_payment | floatformat:2 | intcomma }}</td>
+                                    <td class="text-right">{{ repme.remaining_principal | floatformat:2 | intcomma }}</td>
+                                </tr>
+                            {% endfor %}
+                        <tr>
+                            <th colspan="4" class="text-center">รวมยอดชำระทั้งหมด</td>
+                            <th class="text-right">{{ total_interest | floatformat:2 | intcomma }}</th>
+                            <th class="text-right">{{ total_loan | floatformat:2 | intcomma }}</th>
+                            <td></td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock content %}

@@ -15,6 +15,7 @@ pip install django-api-generator
 pip install python-dotenv
 pip install whitenoise
 pip install pytz
+pip install xhtml2pdf   แปลงเนื้อหา HTML เป็น PDF
 
 ใช้คำสั่ง makemigrations เป็นการแปลง models ของเราให้เป็น schema ของฐานข้อมูล
 python manage.py makemigrations 

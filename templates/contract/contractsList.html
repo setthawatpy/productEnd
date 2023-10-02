@@ -17,71 +17,41 @@
                 </div>
                 <form action="{% url 'search_contract' %}">
                     <div class="input-group">
-                        <input class="form-control" type="search" name="search" placeholder="ป้อนข้มูลที่ต้องการค้นหา" required>
+                        <input class="form-control" type="search" name="search" placeholder="ป้อนเลขที่สัญญาขายฝากที่ต้องการค้นหา" required>
                         <button type="submit" class="btn btn-primary">ค้นหา</button>
                     </div>
                 </form>
                 <h6 class="mb-0 f-16 px-5 text-end">{{ count }} รายการ</h6>
             </div>
-            <div class="card-block table-border-style">
+            <div class="card-block">
                 <div class="table-responsive">
-                    <table class="table table-hover">
+                    <table class="table table-hover table-bordered">
                         <thead class="table-dark text-center">
                             <tr>
-                                <th>วันที่รับซื้อ</th>
-                                <th>เวลาที่ทำสัญญา</th>
-                                <th>แอ็กชัน</th>
+                                <th>เลขที่สัญญาขายฝาก</th>
+                                <th>วันที่ทำสัญญาขายฝาก</th>
+                                <th>ชื่อลูกค้า</th>
+                                <th>รายละเอียดสัญญาขายฝาก</th>
                             </tr>
                         </thead>
                         <tbody>
-                            {% comment %} {% for contract in contracts %}
+                            {% for contract in contracts %}
                                 <tr>
+                                    <td class="text-center">{{ contract.id }}</td>
                                     <td class="text-center">{{ contract.get_date }}</td>
-                                    <td class="text-center">{{ contract.get_time }}</td>
+                                    <td>{{ contract.customer.first_name }} {{ contract.customer.last_name }}</td>
                                     <td class="text-center">
-                                        
+                                        <a href="{% url "contract_detail" contract.id %}">
+                                            <i class="fa-solid fa-file-contract btn btn-primary"></i>
+                                        </a>
                                     </td>
                                 </tr>
-                            {% endfor %} {% endcomment %}
+                            {% endfor %}
                         </tbody>
                     </table>
-                    {% comment %} <form method="POST" action="{% url 'sendLineNotification' %}">
-                            {% csrf_token %}
-                            <button type="submit">Send LINE Notification</button>
-                        </form> {% endcomment %}
                 </div>
             </div>
         </div>
     </div>
 </div>
-<script type="text/javascript">
-    function alertConfirmed(id) {
-        Swal.fire({
-        title: "ต้องการลบรายการนี้หรือไม่ ?",
-        text: "เมื่อรายการนี้ถูกลบ คุณจะไม่สามารถกู้คืนได้ !!",
-        icon: "warning",
-        showCancelButton: true,
-        confirmButtonColor: "#3085d6",
-        cancelButtonColor: "#d33",
-        confirmButtonText: "ตกลง",
-        cancelButtonText: "ยกเลิก",
-        }).then((result) => {
-            if (result.isConfirmed) {
-                Swal.fire(
-                    "ลบข้อมูลสำเร็จ", 
-                    "รายการนี้ถูกลบเรียบร้อย", 
-                    "success"
-                    ).then(() => {
-                    var deleteURL = "{% url 'deleteContract' id=0 %}".replace("0", id);
-                    window.location.href = deleteURL;
-                });
-            } else if (result.dismiss === Swal.DismissReason.cancel) {
-                Swal.fire("คำสั่งถูกยกเลิก", 
-                    "ข้อมูลของคุณยังไม่ถูกลบ", 
-                    "error"
-                );
-            }
-        });
-    }
-</script>
 {% endblock content %}

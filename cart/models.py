@@ -12,11 +12,12 @@ class CartItem(models.Model):
     product = models.ForeignKey(Product, on_delete=models.CASCADE)                  # รหัสสินค้า FK
     quantity = models.IntegerField()                                                # จำนวนสินค้าในตะกร้า
     
-    # ฟังก์ชั่นคำนวณราคาสินค้า
+    # # ฟังก์ชั่นคำนวณราคาสินค้า
     def sub_charge(self):   # คำนวณค่ากำเหน็ด
         return self.product.charge * self.quantity
     
     
     def sub_total(self):    # คำนวณยอดรวมทั้งหมดของสินค้าต่อ 1 ชิ้น
         return (self.product.price * self.quantity) + self.sub_charge()
+    
     

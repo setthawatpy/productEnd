@@ -136,8 +136,11 @@ def search_customers(request):
     search = request.GET.get('search')
     if search:
         customers = Customer.objects.filter(Q(first_name__icontains=search) | Q(id=search))
+        if not customers:
+            messages.error(request, 'ไม่พบข้อมูลลูกค้าที่กำลังค้นหา')
+            return redirect('customersList')
     else:
-        return redirect('employeesList')
+        return redirect('customersList')
     context = {'customers': customers}
     return render(request, "account/customer/customersList.html", context)
 
@@ -269,6 +272,9 @@ def search_employees(request):
     search = request.GET.get('search')
     if search:
         employees = Employee.objects.filter(Q(first_name__icontains=search) | Q(id=search))
+        if not employees:
+            messages.error(request, 'ไม่พบข้อมูลพนักงานที่กำลังค้นหา')
+            return redirect('employeesList')
     else:
         return redirect('employeesList')
     context = {'employees': employees}

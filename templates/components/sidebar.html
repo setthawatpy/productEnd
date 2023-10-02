@@ -57,7 +57,6 @@
                     </ul>
                 </li>
                 {% endif %}
-
                 {% admin_get_menu as app_list %}
                 {% if app_list %}
                     {% for app in app_list %}
@@ -89,7 +88,18 @@
                 
                 {% if request.user.is_authenticated and request.user.is_staff %}
                     <li class="nav-item pcoded-menu-caption">
-                        <label>จัดการข้อมูลพื้นฐาน</label>
+                        <label class="f-14">จัดการข้อมูลพื้นฐาน</label>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{% url 'shopList' %}" class="nav-link">
+                            <span class="pcoded-micon">
+                                <i class="feather icon-file-text"></i>
+                            </span>
+                            <span class="pcoded-mtext">จัดการข้อมูลร้าน</span>
+                        </a>
+                    </li>
+                    <li class="nav-item pcoded-menu-caption">
+                        <label class="f-14">จัดการข้อมูลสินค้า</label>
                     </li>
                     <li class="nav-item">
                         <a href="{% url 'categoryList' %}" class="nav-link">
@@ -107,6 +117,31 @@
                             <span class="pcoded-mtext">จัดการข้อมูลสินค้า</span>
                         </a>
                     </li>
+                    <li class="nav-item pcoded-menu-caption">
+                        <label class="f-14">จัดการข้อมูลรับซื้อทองคำ</label>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{% url 'purchasesList' %}" class="nav-link ">
+                            <span class="pcoded-micon">
+                                <i class="feather icon-file-text"></i>
+                            </span>
+                            <span class="pcoded-mtext">จัดการข้อมูลรับซื้อทองคำ</span>
+                        </a>
+                    </li>
+                    <li class="nav-item pcoded-menu-caption">
+                        <label class="f-14">จัดการข้อมูลขายทองคำ</label>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{% url 'orderHistory' %}" class="nav-link ">
+                            <span class="pcoded-micon">
+                                <i class="feather icon-file-text"></i>
+                            </span>
+                            <span class="pcoded-mtext">จัดการข้อมูลขายทองคำ</span>
+                        </a>
+                    </li>
+                    <li class="nav-item pcoded-menu-caption">
+                        <label class="f-14">จัดการข้อมูลสมาชิก</label>
+                    </li>
                     <li class="nav-item">
                         <a href="{% url 'employeesList' %}" class="nav-link ">
                             <span class="pcoded-micon">
@@ -123,32 +158,94 @@
                             <span class="pcoded-mtext">จัดการข้อมูลลูกค้า</span>
                         </a>
                     </li>
-                    <li class="nav-item">
-                        <a href="{% url 'purchasesList' %}" class="nav-link ">
-                            <span class="pcoded-micon">
-                                <i class="feather icon-file-text"></i>
-                            </span>
-                            <span class="pcoded-mtext">จัดการข้อมูลรับซื้อทองคำ</span>
-                        </a>
+                    <li class="nav-item pcoded-menu-caption">
+                        <label class="f-14">จัดการข้อมูลสัญญาขายฝาก</label>
                     </li>
                     <li class="nav-item">
-                        <a href="{% url 'orderHistory' %}" class="nav-link ">
-                            <span class="pcoded-micon">
-                                <i class="feather icon-file-text"></i>
-                            </span>
-                            <span class="pcoded-mtext">จัดการข้อมูลขายทองคำ</span>
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="{% url 'contractList' %}" class="nav-link ">
+                        <a href="{% url 'contractsList' %}" class="nav-link ">
                             <span class="pcoded-micon">
                                 <i class="feather icon-file-text"></i>
                             </span>
                             <span class="pcoded-mtext">จัดการข้อมูลสัญญาขายฝาก</span>
                         </a>
                     </li>
+                    <li class="nav-item">
+                        <a href="{% url "notificationList" %}" class="nav-link ">
+                            <span class="pcoded-micon">
+                                <i class="feather icon-file-text"></i>
+                            </span>
+                            <span class="pcoded-mtext">แจ้งเตือนชำระค่างวด</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{% url "paymentList" %}" class="nav-link ">
+                            <span class="pcoded-micon">
+                                <i class="feather icon-file-text"></i>
+                            </span>
+                            <span class="pcoded-mtext">ยืนยันการชำระเงิน</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{% url "redemption_list" %}" class="nav-link ">
+                            <span class="pcoded-micon">
+                                <i class="feather icon-file-text"></i>
+                            </span>
+                            <span class="pcoded-mtext">จัดการข้อมูลไถ่ถอนทองคำ</span>
+                        </a>
+                    </li>
                     <li class="nav-item pcoded-menu-caption">
-                        <label>สินค้า</label>
+                        <label class="f-14">รายงาน</label>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{% url "dashboard" %}" class="nav-link ">
+                            <span class="pcoded-micon">
+                                <i class="feather icon-file-text"></i>
+                            </span>
+                            <span class="pcoded-mtext">รายงาน</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{% url "report_account" %}" class="nav-link ">
+                            <span class="pcoded-micon">
+                                <i class="feather icon-file-text"></i>
+                            </span>
+                            <span class="pcoded-mtext">รายงานผู้ใช้งาน</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{% url "report_product" %}" class="nav-link ">
+                            <span class="pcoded-micon">
+                                <i class="feather icon-file-text"></i>
+                            </span>
+                            <span class="pcoded-mtext">รายงานคลังสินค้า</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{% url "report_purchase" %}" class="nav-link ">
+                            <span class="pcoded-micon">
+                                <i class="feather icon-file-text"></i>
+                            </span>
+                            <span class="pcoded-mtext">รายงานยอดซื้อ</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{% url "report_sales" %}" class="nav-link ">
+                            <span class="pcoded-micon">
+                                <i class="feather icon-file-text"></i>
+                            </span>
+                            <span class="pcoded-mtext">รายงานยอดขาย</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{% url "report_contract" %}" class="nav-link ">
+                            <span class="pcoded-micon">
+                                <i class="feather icon-file-text"></i>
+                            </span>
+                            <span class="pcoded-mtext">รายงานการทำสัญญาขายฝาก</span>
+                        </a>
+                    </li>
+                    <li class="nav-item pcoded-menu-caption">
+                        <label class="f-14">สินค้า</label>
                     </li>
                     <li class="nav-item">
                         <a href="{% url 'category' %}" class="nav-link ">

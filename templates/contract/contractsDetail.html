@@ -1,0 +1,172 @@
+{% extends 'components/base.html' %} 
+{% load static %} 
+{% load humanize %}
+
+{% block content %}
+<div class="row">
+    <div class="col-xl-12">
+        <div class="card">
+            <div class="card-header">
+                <h5>รายละเอียดสัญญาขายฝากทองคำ / Contracts Detail </h5>
+            </div>
+            <div class="card-block">
+            <h6>ข้อมูลสัญญาขายฝาก</h6>
+                <div class="table-responsive">
+                    <table class="table table-hover table-bordered">
+                        <tbody>
+                            <tr>
+                                <td style="width: 300px;">เลขที่สัญญาขายฝาก</td>
+                                <td>{{ contract.id }}</td>
+                            </tr>
+                            <tr>
+                                <td style="width: 300px;">เวลาที่ทำรายการ</td>
+                                <td>{{ contract.date_time }}</td>
+                            </tr>
+                            <tr>
+                                <td style="width: 300px;">จำนวนงวดที่ผ่อนชำระ</td>
+                                <td>{{ contract.period }} เดือน</td>
+                            </tr>
+                            <tr>
+                                <td style="width: 300px;">อัตราดอกเบี้ยต่อปี</td>
+                                <td>{{ contract.interest_rate }} %</td>
+                            </tr>
+                            <tr>
+                                <td style="width: 300px;">เงินต้น</td>
+                                <td>{{ contract.total_price | floatformat:2 | intcomma }} บาท</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="card-block">
+            <h6>ข้อมูลลูกค้าที่ทำสัญญาขายฝาก</h6>
+                <div class="table-responsive">
+                    <table class="table table-hover table-bordered">
+                        <tbody>
+                            <tr>
+                                <td style="width: 300px;">เลขบัตรประชาชน</td>
+                                <td>{{ contract.customer.id }}</td>
+                            </tr>
+                            <tr>
+                                <td style="width: 300px;">ชื่อ</td>
+                                <td>{{ contract.customer.first_name }}</td>
+                            </tr>
+                            <tr>
+                                <td style="width: 300px;">นามสกุล</td>
+                                <td>{{ contract.customer.last_name }}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="card-block">
+            <h6>ข้อมูลสินค้าขายฝาก</h6>
+                <div class="table-responsive">
+                    <table class="table table-hover table-bordered">
+                        <tbody>
+                            <tr>
+                                <td style="width: 300px;">จำนวนสินค้าที่ทำรายการ</td>
+                                <td>{{ count }} ชิ้น</td>
+                            </tr>
+                            <tr>
+                                <td style="width: 300px;">น้ำหนักสินค้ารวม</td>
+                                <td>{{ contract.total_weight | floatformat:2 | intcomma }}  กรัม</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="card-block">
+            <h6>ข้อมูลรายการสินค้าขายฝาก</h6>
+                <div class="table-responsive">
+                    <table class="table table-hover table-bordered">
+                        <thead class="table-dark text-center">
+                            <tr>
+                                <tr>
+                                    <th>จำนวน</th>
+                                    <th>ชื่อสินค้า</th>
+                                    <th>น้ำหนัก / กรัม</th>
+                                    <th>ราคาสินค้า / บาท</th>
+                                </tr>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for item in items %}
+                                <tr>
+                                    <td class="text-center">{{ forloop.counter }}</td>
+                                    <td>{{ item.title }}</td>
+                                    <td class="text-right">{{ item.weight | floatformat:2 | intcomma }}</td>
+                                    <td class="text-right">{{ item.price | floatformat:2 | intcomma }}</td>
+                                </tr>
+                            {% endfor %}
+                            <tr>
+                                <th scope="row" colspan="2" class="text-center fw-bold">รวมทั้งหมด</th>
+                                <td class="text-right fw-bold">{{ contract.total_weight | floatformat:2 | intcomma }}</td>
+                                <td class="text-right fw-bold">{{ contract.total_price | floatformat:2 | intcomma }}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="card-block">
+            <h6>ข้อมูลกำหนดการชำระคืน</h6>
+                <div class="table-responsive">
+                    <table class="table table-hover table-bordered">
+                        <thead class="table-dark text-center">
+                            <tr>
+                                <tr>
+                                    <th>งวดที่</th>
+                                    <th>วันครบกำหนด</th>
+                                    <th>ยอดหนี้ / บาท</th>
+                                    <th>ผ่อนชำระรายเดือน / บาท</th>
+                                    <th>ดอกเบี้ย / เดือน</th>
+                                    <th>เงินต้น / เดือน</th>
+                                    <th>เงินต้นคงเหลือ / บาท</th>
+                                </tr>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tbody>
+                                {% for repayment in repayments %}
+                                    <tr>
+                                        <td class="text-center">{{ repayment.month }}</td>
+                                        <td class="text-center">{{ repayment.due_date }}</td>
+                                        <td class="text-right">{{ repayment.get_monthly_payment | floatformat:2 | intcomma }}</td>
+                                        <td class="text-right">{{ repayment.monthly_installments | floatformat:2 | intcomma }}</td>
+                                        <td class="text-right">{{ repayment.monthly_interest | floatformat:2 | intcomma }}</td>
+                                        <td class="text-right">{{ repayment.monthly_payment | floatformat:2 | intcomma }}</td>
+                                        <td class="text-right">{{ repayment.remaining_principal | floatformat:2 | intcomma }}</td>
+                                    </tr>
+                                {% endfor %}
+                                <tr>
+                                    <th colspan="4" class="text-center">รวมยอดชำระทั้งหมด</th>
+                                    <th class="text-right">{{ contract.total_interest | floatformat:2 | intcomma }}</th>
+                                    <th class="text-right">{{ contract.total_loan | floatformat:2 | intcomma }}</th>
+                                    <td></td>
+                                </tr>
+                            </tbody>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="card-block">
+            <h6>รูปภาพสินค้าขายฝาก</h6>
+                <div class="table-responsive">
+                    <table class="table table-hover table-bordered" style="width:100%">
+                        <tbody>
+                            <tbody>
+                                <tr>
+                                    <td style="width: 250px;">รูปภาพสินค้าขายฝาก</td>
+                                    <td style="text-align: center; vertical-align: middle;">
+                                        <img src="{{ contract.picture.url }}" alt="profile image" class="img-fluid rounded" style="display: block; margin: 0 auto;" width="50%" height="150">
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock content %}

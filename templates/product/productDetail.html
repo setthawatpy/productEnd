@@ -88,12 +88,7 @@
                                     {% if products.stock <= 0 %}
                                         <h2 class="mx-2 text-secondary text-danger"><strong>สินค้าหมด</strong></h2>
                                     {% else %}
-                                    <div class="input-group">
-                                        <button type="button" class="btn btn-outline-secondary" id="minus-btn">-</button>
-                                        <input type="number" class="form-control text-center" id="quantity-input" name="qnt" value="1" min="1">
-                                        <button type="button" class="btn btn-outline-secondary" id="plus-btn">+</button>
-                                    </div>
-                                    <a href="{% url 'addCart' products.id %}" class="btn btn-warning">
+                                    <a href="{% url 'add_cart' products.id %}" class="btn btn-warning">
                                         <i class="fa-solid fa-cart-shopping me-1"></i>เพิ่มไปยังรถเข็น
                                     </a>
                                     {% endif %}
@@ -107,21 +102,6 @@
         </div>
     </div>
 </div>
-<script>
-    const minusBtn = document.getElementById('minus-btn');
-    const plusBtn = document.getElementById('plus-btn');
-    const quantityInput = document.getElementById('quantity-input');
-
-    minusBtn.addEventListener('click', () => {
-        if (quantityInput.value > 1) {
-            quantityInput.value = parseInt(quantityInput.value) - 1;
-        }
-    });
-
-    plusBtn.addEventListener('click', () => {
-        quantityInput.value = parseInt(quantityInput.value) + 1;
-    });
-</script>
 <style>
     input[type="number"]::-webkit-inner-spin-button,
     input[type="number"]::-webkit-outer-spin-button {

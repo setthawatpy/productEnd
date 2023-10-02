@@ -9,84 +9,32 @@
             <div class="card-header">
                 <h5>แบบฟอร์มสัญญาขายฝากทองคำ</h5>
             </div>
-            <div class="d-flex justify-content-between align-items-center mt-5">
-                <div class="col-lg-3 px-4">
-                    <a href="{% url 'addItem' %}" class="btn btn-primary btn-block">
-                        <i class="fa-solid fa-plus"></i>เพิ่มสินค้าขายฝาก
-                    </a>
-                </div>
-            </div>
-            <div class="card-block table-border-style">
-                <div class="table-responsive">
-                    <table class="table table-hover">
-                        <thead class="table-dark text-center">
-                            <tr>
-                                <th>ชื่อสินค้า</th>
-                                <th>น้ำหนัก</th>
-                                <th>ราคา</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {% comment %} {% for contract in  %}
-                                <tr>
-                                    <td class="text-center">{{ contract.title }}</td>
-                                    <td class="text-center">{{ contract.weight }}</td>
-                                    <td class="text-center">{{ contract.price }}</td>
-                                </tr>
-                            {% endfor %} {% endcomment %}
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-            {% comment %} <form method="POST" enctype="multipart/form-data">
+            <form method="POST" enctype="multipart/form-data">
                 {% csrf_token %}
                 <div class="row">
                     <div class="col-12 col-md-12 px-5">
                         <div class="form-group">
+                            <label>ชื่อลูกค้า</label>
                             {{ form.customer }}
                         </div>
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-12 col-md-12 px-5">
-                        <div class="form-group">
-                            <label>ประเภทสินค้า</label>
-                            {{ form.title }}
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
                     <div class="col-12 col-md-6 px-5">
                         <div class="form-group">
-                            <label>น้ำหนัก</label>
-                            <div class="d-flex">
-                                {{ form.weight }}
-                                <span class="ml-3 mt-2">กรัม</span>
-                            </div>
+                            <label>งวดที่ต้องการผ่อนชำระ</label>
+                            {{ form.period }}
                         </div>
                     </div>
                     <div class="col-12 col-md-6 px-5">
                         <div class="form-group">
-                            <label>ราคาทองที่รับขายฝาก</label>
+                            <label>อัตราดอกเบี้ยต่อปี %</label>
                             <div class="d-flex">
-                                {{ form.price }}
-                                <span class="ml-3 mt-2">บาท</span>
+                                {{ form.interest_rate }}
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="row">
-                    <div class="col-12 col-md-6 px-5">
-                        <div class="form-group">
-                            <label>งวด</label>
-                            <div class="d-flex">
-                                {{ form.period }}
-                                <span class="ml-3 mt-2">บาท</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
                     <div class="col-12 col-md-12 px-5 mt-3">
                         <div class="form-group">
                             <label for="images" class="drop-container">
@@ -102,10 +50,7 @@
                         <button class="btn btn-danger" type="reset">ยกเลิก</button>
                     </div>
                 </div>
-            </form> {% endcomment %}
-                    </div>
-                </div>
-            </div>
+            </form>
         </div>
     </div>
 </div>

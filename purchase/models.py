@@ -35,12 +35,18 @@ class Purchase(models.Model):
     def get_date(self):
         tz_thai = timezone('Asia/Bangkok')
         dt_thai = self.date_time.astimezone(tz_thai)
-        
+
         # แปลง ค.ศ. เป็น พ.ศ.
         thai_year = dt_thai.year + 543
         
-        return dt_thai.strftime(f'%d/%m/{thai_year}')
-        # return dt_thai.strftime('%d/%m/%Y')     # วันที่ : วัน / เดือน / ปี
+        # ชื่อเดือนในภาษาไทย
+        thai_month_names = [
+            'มกราคม', 'กุมภาพันธ์', 'มีนาคม', 'เมษายน', 'พฤษภาคม', 'มิถุนายน',
+            'กรกฎาคม', 'สิงหาคม', 'กันยายน', 'ตุลาคม', 'พฤศจิกายน', 'ธันวาคม'
+        ]
+        thai_month = thai_month_names[dt_thai.month - 1]
+
+        return dt_thai.strftime(f'%d {thai_month} {thai_year}')
     
     
     def get_time(self):     

@@ -76,13 +76,11 @@
                                         </tr>
                                         <tr>
                                             <th scope="row" colspan="5" class="border-0 text-end">ค่ากำเหน็ด</th>
-                                            <td class="border-0 text-end">{{ order.charge | floatformat:2 | intcomma }}</td>
+                                            <th class="border-0 text-end">{{ order.charge | floatformat:2 | intcomma }}</th>
                                         </tr>
                                         <tr>
                                             <th scope="row" colspan="5" class="border-0 text-end">ยอดชำระเงินทั้งหมด</th>
-                                            <td class="border-0 text-end">
-                                                <h6 class="m-0 fw-semibold">{{ order.total | floatformat:2 | intcomma }}</h5>
-                                            </td>
+                                            <th class="border-0 text-end">{{ order.total | floatformat:2 | intcomma }}</th>
                                         </tr>
                                     </tbody>
                                 </table>

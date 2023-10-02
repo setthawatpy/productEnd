@@ -1,0 +1,57 @@
+{% extends 'components/base.html' %} 
+{% load static %} 
+{% load humanize %}
+
+{% block content %}
+<div class="row">
+    <div class="col-xl-12">
+        <div class="card">
+            <div class="card-header">
+                <h5>ตารางรายการสัญญาขายฝากทองคำ / Gold contracts List Table</h5>
+            </div>
+            <div class="d-flex justify-content-between align-items-center mt-5">
+                <div class="col-lg-3 px-4">
+                    
+                </div>
+                <form action="{% url 'search_contract' %}">
+                    <div class="input-group">
+                        <input class="form-control" type="search" name="search" placeholder="ป้อนเลขที่สัญญาขายฝากที่ต้องการค้นหา" required>
+                        <button type="submit" class="btn btn-primary">ค้นหา</button>
+                    </div>
+                </form>
+                <h6 class="mb-0 f-16 px-5 text-end">{{ count }} รายการ</h6>
+            </div>
+            <div class="card-block">
+                <div class="table-responsive">
+                    <table class="table table-hover table-bordered">
+                        <thead class="table-dark text-center">
+                            <tr>
+                                <th>เลขที่สัญญาขายฝาก</th>
+                                <th>วันที่ทำสัญญาขายฝาก</th>
+                                <th>ชื่อลูกค้า</th>
+                                <th>รายละเอียดค่างวด</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for contract in contracts %}
+                                <tr>
+                                    <td class="text-center">{{ contract.id }}</td>
+                                    <td class="text-center">{{ contract.get_date }}</td>
+                                    <td>{{ contract.customer.first_name }} {{ contract.customer.last_name }}</td>
+                                    <td class="text-center">
+                                        <div class="d-flex justify-content-center">
+                                            <a href="{% url "notification_detail" contract.id %}">
+                                                <i class="fa-solid fa-list-check btn btn-primary"></i>
+                                            </a>
+                                        </div>
+                                    </td>
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock content %}

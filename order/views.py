@@ -12,7 +12,7 @@ def order(request):
     counter = 0
     charge = 0
     total = 0
-    netTotal = 0
+    net_total = 0
 
     # ดึงข้อมูลตะกร้าสินค้า
     cart = Cart.objects.get(cart_id=createCart(request), employee=request.user)
@@ -22,10 +22,10 @@ def order(request):
         counter += item.quantity
         charge += item.sub_charge()
         total += item.sub_total()
-    netTotal = charge + total
+    net_total = charge + total
 
     # สร้างใบสั่งซื้อ
-    order = Order.objects.create(employee=request.user, total=total, charge=charge, netTotal=netTotal)
+    order = Order.objects.create(employee=request.user, total=total, charge=charge, net_total=net_total)
     order.save()
 
     # บันทึกรายการสั่งซื้อ และตัด Stock

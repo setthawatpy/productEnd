@@ -1,0 +1,92 @@
+{% extends 'components/base.html' %} 
+{% load static %} 
+{% load humanize %}
+
+{% block content %}
+<div class="row">
+    <div class="col-xl-12">
+        <div class="card">
+            <div class="card-header">
+                <h5>กำหนดการชำระเงินในแต่ละงวด / Payment schedule for each installment</h5>
+            </div>
+            <div class="card-block">
+                <div class="table-responsive">
+                    <table class="table table-hover table-bordered">
+                        <thead class="table-dark text-center">
+                            <tr>
+                                <th>งวดที่</th>
+                                <th>วันครบกำหนด</th>
+                                <th>ยอดหนี้</th>
+                                <th>ผ่อนชำระรายเดือน</th>
+                                <th>ดอกเบี้ย / เดือน</th>
+                                <th>เงินต้น / เดือน</th>
+                                <th>เงินต้นคงเหลือ</th>
+                                <th>รายละเอียดการชำระเงิน</th>
+                                <th>อัพโหลดรูป</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for repayment in repayments %}
+                                <tr>
+                                    <td class="text-center">{{ repayment.month }}</td>
+                                    <td class="text-center">{{ repayment.due_date }}</td>
+                                    <td class="text-right">{{ repayment.get_monthly_payment | floatformat:2 | intcomma }}</td>
+                                    <td class="text-right">{{ repayment.monthly_installments | floatformat:2 | intcomma }}</td>
+                                    <td class="text-right">{{ repayment.monthly_interest | floatformat:2 | intcomma }}</td>
+                                    <td class="text-right">{{ repayment.monthly_payment | floatformat:2 | intcomma }}</td>
+                                    <td class="text-right">{{ repayment.remaining_principal | floatformat:2 | intcomma }}</td>
+                                    <td class="text-center">
+                                        {% if user.is_staff %}
+                                            {% if repayment.status %}
+                                                <b class="text-success">ชำระเงินแล้ว</b>
+                                            {% else %}
+                                                <a href="{% url 'confirm_payment' repayment.id %}">
+                                                    <i class="fa-solid fa-upload btn btn-primary"></i>
+                                                </a>
+                                            {% endif %}
+                                        {% else %}
+                                            {% if repayment.status %}
+                                                <b class="text-success">ชำระเงินแล้ว</b>
+                                            {% else %}
+                                                <b class="text-warning">ยังไม่ชำระเงิน</b>
+                                            {% endif %}
+                                        {% endif %}
+                                    </td>
+                                    {% if repayment.status %}
+                                        <td class="text-center">
+                                            <a href="{% url "payment_details" repayment.id %}">
+                                                <i class="fa-solid fa-list-check btn btn-success"></i>
+                                            </a>
+                                        </td>
+                                        {% else %}
+                                        <td></td>
+                                    {% endif %}
+                                </tr>
+                            {% endfor %}
+                            <tr>
+                                <th colspan="4" class="text-center">รวมยอดชำระทั้งหมด</td>
+                                    <th class="text-right">{{ contract.total_interest | floatformat:2 | intcomma }}</th>
+                                    <th class="text-right">{{ contract.total_loan | floatformat:2 | intcomma }}</th>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    document.getElementById('pictureInput').addEventListener('change', function () {
+    var fileName = this.value.split('\\').pop();
+    if (fileName) {
+        document.querySelector('.btn-primary').textContent = fileName;
+    } else {
+        document.querySelector('.btn-primary').textContent = 'เพิ่มรูปภาพ';
+    }
+});
+</script>
+
+{% endblock content %}

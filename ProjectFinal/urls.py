@@ -31,6 +31,7 @@ urlpatterns = [
     path('cart/', include('cart.urls')),
     path('order/', include('order.urls')),
     path('contract/', include('contract.urls')),
+    path('dashboard/', include('dashboard.urls')),
     path("api/", include("api.urls")),        # <-- NEW
     path('login/jwt/', view=obtain_auth_token), # <-- NEW
     

@@ -1,0 +1,107 @@
+{% load static %} 
+{% load humanize %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    
+
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Prompt:wght@300;400&display=swap');
+
+        body {
+            font-family: 'Prompt', sans-serif;
+        }
+    </style>
+</head>
+<body>
+    <div class="container my-5 px-5">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="invoice-title">
+                            <div class="d-flex justify-content-between align-items-center">
+                                <p class="f-30">{{ shops.title }}</p>
+                                <p class="f-20 text-end">ใบเสร็จรับซื้อทองคำ #{{ purchases.id }}</p>
+                            </div>
+                            <div class="text-muted">
+                                <p class="mb-0 mt-3">
+                                    <i class="fa-solid fa-house"></i> {{ shops.address }}
+                                </p>
+                                <p class="mb-0">
+                                    <i class="fa-solid fa-envelope"></i> {{ shops.email }}
+                                </p>
+                                <p class="mb-0">
+                                    <i class="fa-solid fa-phone"></i> {{ shops.phone_number }}
+                                </p>
+                            </div>
+                        </div>
+                        <hr class="my-4">
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <div class="text-muted">
+                                    <p class="mb-2 f-16">ข้อมูลลูกค้าที่ทำการรับซื้อ</p>
+                                    <p class="mb-0">ชื่อ: {{ purchases.first_name }} {{ purchases.last_name }}</p>
+                                    <p class="mb-0">ที่อยู่: {{ purchases.address }}</p>
+                                    <p>เบอร์โทร: {{ purchases.phone_number }}</p>
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="text-muted text-sm-end">
+                                    <div>
+                                        <p class="mb-2 f-16">วันที่ทำรายการ</p>
+                                        <p class="mb-0"> {{ purchases.get_date }} {{ purchases.get_time }} น.</p>
+                                        <p class="mb-0">พนักงานที่ทำรายการ {{ purchases.employee.first_name }} {{ purchases.employee.last_name }}</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="py-2">
+                            <p class="f-16">ข้อมูลสินค้าที่รับซื้อ</p>
+                            <div class="table-responsive">
+                                <table class="table align-middle table-nowrap table-centered mb-0">
+                                    <thead>
+                                        <tr>
+                                            <th style="width: 70px;">No.</th>
+                                            <th>ประเภทสินค้า</th>
+                                            <th>จำนวนสินค้า/ชิ้น</th>
+                                            <th>น้ำหนัก/กรัม</th>
+                                            <th class="text-end" style="width: 120px;">ราคารวม</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {% for detail in purchaseDetail %}
+                                            <tr>
+                                                <th scope="row">{{ forloop.counter }}</th>
+                                                <td>{{ detail.purchase.gold_type }}</td>
+                                                <td>{{ detail.purchase.quantity }}</td>
+                                                <td>{{ detail.purchase.weight }}</td>
+                                                <td>{{ detail.purchase.price }}</td>
+                                            </tr>
+                                            <tr>
+                                                <th scope="row" class="border-0 text-end">รวมทั้งหมด</th>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td class="border-0 text-end">
+                                                    <h6 class="m-0 fw-semibold">{{ detail.purchase.price | floatformat:2 | intcomma }}</h6>
+                                                </td>
+                                            </tr>
+                                        {% endfor %}
+                                    </tbody>
+                                </table>
+                            </div>
+                            
+                        </div>
+                    </div>
+                </div>
+            </div><!-- end col -->
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+</body>
+</html>

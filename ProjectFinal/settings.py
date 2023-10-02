@@ -53,6 +53,7 @@ INSTALLED_APPS = [
     'cart.apps.CartConfig',
     'order.apps.OrderConfig',
     'contract.apps.ContractConfig',
+    'dashboard.apps.DashboardConfig',
     
     # Tooling Dynamic_DT
     'django_dyn_dt',             # <-- NEW: Dynamic_DT

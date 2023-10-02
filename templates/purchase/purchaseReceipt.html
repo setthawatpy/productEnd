@@ -14,18 +14,18 @@
                 <div class="card-body">
                     <div class="invoice-title">
                         <div class="d-flex justify-content-between align-items-center">
-                            <p class="f-30">ร้านทองสยามโต๊ะกัง</p>
+                            <p class="f-30">{{ shops.title }}</p>
                             <p class="f-20 text-end">ใบเสร็จรับซื้อทองคำ #{{ purchases.id }}</p>
                         </div>
                         <div class="text-muted">
                             <p class="mb-0 mt-3">
-                                <i class="fa-solid fa-house"></i> 297 ถนนกาฬสินธุ์ ตำบลกาฬสินธุ์ อำเภอเมืองกาฬสินธุ์ จังหวัดกาฬสินธุ์ 46000
+                                <i class="fa-solid fa-house"></i> {{ shops.address }}
                             </p>
                             <p class="mb-0">
-                                <i class="fa-solid fa-envelope"></i> test@gmail.com
+                                <i class="fa-solid fa-envelope"></i> {{ shops.email }}
                             </p>
                             <p class="mb-0">
-                                <i class="fa-solid fa-phone"></i> 012-345-6789
+                                <i class="fa-solid fa-phone"></i> {{ shops.phone_number }}
                             </p>
                         </div>
                     </div>
@@ -71,26 +71,20 @@
                                             <td>{{ detail.purchase.weight }}</td>
                                             <td>{{ detail.purchase.price }}</td>
                                         </tr>
+                                        <tr>
+                                            <th scope="row" colspan="4" class="border-0 text-end">รวมทั้งหมด</th>
+                                            <th class="border-0 text-end">{{ detail.purchase.price | floatformat:2 | intcomma }}</th>
+                                        </tr>
                                     {% endfor %}
-                                    {% comment %} <tr>
-                                        <th scope="row" colspan="4" class="text-end">Sub Total</th>
-                                        <td class="text-end">$732.50</td>
-                                    </tr> {% endcomment %}
-                                    <tr>
-                                        <th scope="row" colspan="4" class="border-0 text-end">รวมทั้งหมด</th>
-                                        <td class="border-0 text-end">
-                                            <h6 class="m-0 fw-semibold">{{ purchase.price | floatformat:2 | intcomma }}</h6>
-                                        </td>
-                                    </tr>
                                 </tbody>
                             </table>
                         </div>
                         <div class="d-print-none mt-4">
                             <div class="float-end">
-                                {% comment %} <a href="javascript:window.print()" class="btn btn-success me-1"><i class="fa fa-print"></i></a> {% endcomment %}
-                                {% comment %} <a href="javascript:void(0)" id="print-btn" class="btn btn-success me-1"><i class="fa fa-print"></i></a> {% endcomment %}
-                                <a href="javascript:void(0)" onclick="printInvoice()" class="btn btn-success me-1"><i class="fa fa-print"></i> Print</a>
-                                <a href="#" class="btn btn-primary w-md">Send</a>
+                                <a href="{% url "render_pdf_view" purchases.id %}?request=request" target="_blank" class="btn btn-primary w-md">
+                                    <i class="fa-solid fa-file-pdf"></i>PDF
+                                </a>
+                                {% comment %} <a href="#" class="btn btn-primary w-md">Send</a> {% endcomment %}
                             </div>
                         </div>
                     </div>

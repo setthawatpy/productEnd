@@ -1,0 +1,227 @@
+{% extends 'components/base.html' %} 
+{% load static %} 
+{% load humanize %}
+{% block breadcrumbs %}
+{% endblock breadcrumbs %}
+
+{% block content %}
+<div class="row">
+    <div class="col-md-12 col-xl-4">
+        <div class="card card-social">
+            <div class="card-block border-bottom">
+                <div class="row align-items-center justify-content-center">
+                    <div class="col-auto">
+                        <i class="fa-solid fa-users text-primary f-36"></i>
+                    </div>
+                    <div class="col text-right">
+                        <h3>ผู้ใช้งานทั้งหมด</h3>
+                        <h5 class="mb-0 f-26">{{ total_count | intcomma }}
+                            <span>คน</span></h5>
+                    </div>
+                </div>
+            </div>
+            <div class="card-block">
+                <div class="row align-items-center justify-content-center card-active">
+                    <div class="col-6">
+                        <h6 class="text-center m-b-10">
+                            <span class="text-muted m-r-5f-18 ">ชาย: {{ total_male }}</span>
+                        </h6>
+                        <div class="progress">
+                            <div class="progress-bar progress-c-theme" role="progressbar" style="width:60%;height:6px;"
+                            aria-valuenow="60" aria-valuemin="0" aria-valuemax="100"></div>
+                        </div>
+                    </div>
+                    <div class="col-6">
+                        <h6 class="text-center m-b-10">
+                            <span class="text-muted m-r-5 f-18">หญิง: {{ total_female }}</span>
+                        </h6>
+                        <div class="progress">
+                            <div class="progress-bar progress-c-theme2" role="progressbar" style="width:45%;height:6px;"
+                            aria-valuenow="45" aria-valuemin="0" aria-valuemax="100"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-12 col-xl-4">
+        <div class="card card-social">
+            <div class="card-block border-bottom">
+                <div class="row align-items-center justify-content-center">
+                    <div class="col-auto">
+                        <i class="fa-solid fa-users-gear text-primary f-36"></i>
+                    </div>
+                    <div class="col text-right">
+                        <h3>พนักงาน</h3>
+                        <h5 class="mb-0 f-26">{{ employee_count | intcomma }}
+                            <span>คน</span>
+                        </h5>
+                    </div>
+                </div>
+            </div>
+            <div class="card-block">
+                <div class="row align-items-center justify-content-center card-active">
+                    <div class="col-6">
+                        <h6 class="text-center m-b-10">
+                            <span class="text-muted m-r-5 f-18">ชาย: {{ employee_male }}</span>
+                        </h6>
+                        <div class="progress">
+                            <div class="progress-bar progress-c-green" role="progressbar" style="width:40%;height:6px;"
+                            aria-valuenow="40" aria-valuemin="0" aria-valuemax="100"></div>
+                        </div>
+                    </div>
+                    <div class="col-6">
+                        <h6 class="text-center  m-b-10">
+                            <span class="text-muted m-r-5 f-18">หญิง: {{ employee_female }}</span>
+                        </h6>
+                        <div class="progress">
+                            <div class="progress-bar progress-c-blue" role="progressbar" style="width:70%;height:6px;"
+                            aria-valuenow="70" aria-valuemin="0" aria-valuemax="100"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-12 col-xl-4">
+        <div class="card card-social">
+            <div class="card-block border-bottom">
+                <div class="row align-items-center justify-content-center">
+                    <div class="col-auto">
+                        <i class="fa-solid fa-users-line text-primary f-36"></i>
+                    </div>
+                    <div class="col text-right">
+                        <h3>ลูกค้า</h3>
+                        <h5 class="mb-0 f-26">{{ customer_count | intcomma }}
+                            <span>คน</span>
+                        </h5>
+                    </div>
+                </div>
+            </div>
+            <div class="card-block">
+                <div class="row align-items-center justify-content-center card-active">
+                    <div class="col-6">
+                        <h6 class="text-center m-b-10">
+                            <span class="text-muted m-r-5 f-18">ชาย: {{ customer_male }}</span>
+                        </h6>
+                        <div class="progress">
+                            <div class="progress-bar progress-c-theme" role="progressbar" style="width:60%;height:6px;"
+                            aria-valuenow="60" aria-valuemin="0" aria-valuemax="100"></div>
+                        </div>
+                    </div>
+                    <div class="col-6">
+                        <h6 class="text-center  m-b-10">
+                            <span class="text-muted m-r-5 f-18">หญิง: {{ customer_female }}</span>
+                        </h6>
+                        <div class="progress">
+                            <div class="progress-bar progress-c-theme2" role="progressbar" style="width:45%;height:6px;"
+                            aria-valuenow="45" aria-valuemin="0" aria-valuemax="100"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-xl-4 col-md-12">
+        <div class="card card-event">
+            <div class="card-block">
+                <script src="path/to/chartjs/dist/chart.umd.js"></script>
+                <div class="row align-items-center justify-content-center">
+                    <div class="col">
+                        <h5 class="m-0">ผู้ใช้งานทั้งหมด</h5>
+                    </div>
+                    <div class="col-auto">
+                        <label class="label theme-bg2 text-white f-14 f-w-400 float-right">100%</label>
+                    </div>
+                    <div>
+                        <canvas id="myChart" width="400" height="200"></canvas>
+                        <script>
+                            var ctx = document.getElementById('myChart').getContext('2d');
+                            var myChart = new Chart(ctx, {
+                                type: 'doughnut',
+                                data: {
+                                    labels: ['พนักงาน', 'ลูกค้า'],
+                                    datasets: [{
+                                        label: 'จำนวน',
+                                        data:[{{ employee_count }}, {{ customer_count }}],
+                                        backgroundColor: [
+                                        '#00759A', 
+                                        '#008CAF',
+                                        '#00A3BF',
+                                        '#00BBC8',
+                                        '#00D2CB',
+                                        '#00E9C7',
+                                        '#00FFBE', 
+                                        ],
+                                        borderColor: [
+                                            'rgba(75, 192, 192, 1)',
+                                        ],
+                                        borderWidth: 1
+                                    }]
+                                },
+                                options: {
+                                    scales: {
+                                        yAxes: [{
+                                            ticks: {
+                                                beginAtZero: true
+                                            }
+                                        }]
+                                    }
+                                }
+                            });
+                        </script>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-xl-8 col-md-12">
+        <div class="card card-event">
+            <div class="card-block">
+                <div class="row align-items-center justify-content-center">
+                    <div class="col">
+                        <h5 class="m-0"></h5>
+                    </div>
+                    <div class="col-auto">
+                        <label class="label theme-bg2 text-white f-14 f-w-400 float-right">100%</label>
+                    </div>
+                    <canvas id="chart_user_account" width="800" height="400"></canvas>
+                    <div>
+                        <script>
+                            var ctx = document.getElementById("chart_user_account").getContext("2d");
+                            var chart_user_account = new Chart(ctx, {
+                                type: 'bar',
+                                data: {
+                                    labels: ["พนักงาน", "ลูกค้า"],
+                                    datasets: [{
+                                        label: "ชาย",
+                                        backgroundColor: "rgba(54, 162, 235, 0.2)",
+                                        borderColor: 'rgb(54, 162, 235)',
+                                        data: [{{ employee_male }}, {{ customer_male }}]
+                                    }, {
+                                        label: "หญิง",
+                                        backgroundColor: "rgba(142, 94, 162, 0.2)",
+                                        borderColor: 'rgb(142, 94, 162)',
+                                        data: [{{ employee_female }}, {{ customer_female }}]
+                                    },
+                                    {borderWidth: 1}
+                                    ]
+                                },
+                                options: {
+                                    scales: {
+                                        yAxes: [{
+                                            ticks: {
+                                                beginAtZero: true
+                                            }
+                                        }]
+                                    }
+                                }
+                            });
+                        </script>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock content %}

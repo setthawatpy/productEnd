@@ -79,10 +79,14 @@ def search_category(request):
     search = request.GET.get('search')
     if search:
         category = Category.objects.filter(title__icontains=search)
+        if not category:
+            messages.error(request, 'ไม่พบข้อมูลหมวดหมู่สินค้ากำลังค้นหา')
+            return redirect('categoryList')
     else:
         return redirect('categoryList')
     context = {'category': category}
     return render(request, "product/category/categoryList.html", context)
+
 
 
 
@@ -154,8 +158,10 @@ def productDetail(request, id):
 def search_product(request):
     search = request.GET.get('search')
     if search:
-        products = Product.objects.filter(Q(title__icontains=search) | Q(id=search))
-        print(products)
+        products = Product.objects.filter(Q(title__icontains=search) | Q(id=search) | Q(category__title__icontains=search))
+        if not products:
+            messages.error(request, 'ไม่พบข้อมูลสินค้าที่กำลังค้นหา')
+            return redirect('productList')
     else:
         return redirect('productList')
     context = {'products': products}

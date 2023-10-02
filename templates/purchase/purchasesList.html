@@ -19,7 +19,7 @@
                         <i class="fa-solid fa-plus"></i>เพิ่มรายการรับซื้อทอง
                     </a>
                 </div>
-                <form action="{% url 'search_customers' %}">
+                <form action="{% url 'search_purchases' %}">
                     <div class="input-group">
                         <input class="form-control" type="search" name="search" placeholder="ป้อนชื่อลูกค้าที่ต้องการค้นหา" required>
                         <button type="submit" class="btn btn-primary">ค้นหา</button>
@@ -27,9 +27,9 @@
                 </form>
                 <h6 class="mb-0 f-16 px-5 text-end">{{ count }} รายการ</h6>
             </div>
-            <div class="card-block table-border-style">
+            <div class="card-block">
                 <div class="table-responsive">
-                    <table class="table table-hover">
+                    <table class="table table-hover table-bordered">
                         <thead class="table-dark text-center">
                             <tr>
                                 <th>วันที่รับซื้อ</th>

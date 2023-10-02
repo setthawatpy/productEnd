@@ -1,0 +1,91 @@
+{% extends 'components/base.html' %} 
+{% load static %} 
+{% load humanize %}
+
+{% block content %}
+<div class="row">
+    <div class="col-xl-12">
+        <div class="card">
+            <div class="card-header">
+                <h5>ตารางรายการไถ่ถอน / Redemption List Table</h5>
+            </div>
+            <div class="d-flex justify-content-between align-items-center mt-5">
+                <div class="col-lg-3 px-4">
+                    
+                </div>
+                <form action="{% url 'search_contract' %}">
+                    <div class="input-group">
+                        <input class="form-control" type="search" name="search" placeholder="ป้อนเลขที่สัญญาขายฝากที่ต้องการค้นหา" required>
+                        <button type="submit" class="btn btn-primary">ค้นหา</button>
+                    </div>
+                </form>
+                <h6 class="mb-0 f-16 px-5 text-end">{{ count }} รายการ</h6>
+            </div>
+            <div class="card-block">
+                <div class="table-responsive">
+                    <table class="table table-hover table-bordered">
+                        <thead class="table-dark text-center">
+                            <tr>
+                                <th>เลขที่สัญญาขายฝาก</th>
+                                <th>วันที่ทำสัญญาขายฝาก</th>
+                                <th>ชื่อลูกค้า</th>
+                                <th>สถานะสัญญาขายฝาก</th>
+                                <th>ไถ่ถอนทองคำ</th>
+                                <th>รายละเอียดสัญญาขายฝาก</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for contract in contracts %}
+                                <tr>
+                                    <td class="text-center">{{ contract.id }}</td>
+                                    <td class="text-center">{{ contract.get_date }}</td>
+                                    <td>{{ contract.customer.first_name }} {{ contract.customer.last_name }}</td>
+                                    <td class="text-center">
+                                        {% if contract.contract_status %}
+                                            <b class="text-success">สัญญาขายฝากเสร็จสิน</b>
+                                        {% else %}
+                                            <b class="text-warning">อยู่ในระหว่างการชำระค่างวดในสัญญา</b>
+                                        {% endif %}
+                                    </td>
+                                    <td class="text-center">
+                                        {% if request.user.is_staff %}
+                                            {% if contract.contract_status %}
+                                                {% if contract.redemption_status %}
+                                                    <b class="text-success">ไถ่ถอนทองคำสำเร็จ</b>
+                                                {% else %}
+                                                    <form method="POST" action="{% url 'confirm_redemption' contract.id %}">
+                                                        {% csrf_token %}
+                                                        <button class="btn btn-success" type="submit">
+                                                            <i class="fa-solid fa-square-check"></i> ยืนยันการไถ่ถอน
+                                                        </button>
+                                                    </form>
+                                                {% endif %}
+                                            {% else %}
+                                                <b class="text-warning">สัญญาขายฝากยังไม่เสร็จสิน</b>
+                                            {% endif %}
+                                        {% else %}
+                                            {% if contract.redemption_status %}
+                                                <b class="text-success">ไถ่ถอนทองคำสำเร็จ</b>
+                                            {% else %}
+                                                <b class="text-warning">อยู่ในระหว่างการชำระ</b>
+                                            {% endif %}
+                                        {% endif %}
+                                    </td>
+                                    <td class="text-center">
+                                        <div class="d-flex justify-content-center">
+                                            <a href="{% url "redemption_detail" contract.id %}">
+                                                <i class="fa-solid fa-list-check btn btn-primary"></i>
+                                            </a>
+                                        </div>
+                                    </td>
+                                </tr>
+                            {% endfor %}
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock content %}

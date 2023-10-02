@@ -1,0 +1,57 @@
+{% extends 'components/base.html' %} 
+{% load static %} 
+{% load humanize %}
+
+{% block content %}
+<div class="row">
+    <div class="col-xl-12">
+        <div class="card">
+            <div class="card-header">
+                <h5>รายละเอียดการชำระเงิน / Payment Detail</h5>
+            </div>
+            <div class="card-block">
+                <div class="table-responsive">
+                    <table class="table table-hover table-bordered">
+                        <tbody>
+                            <tr>
+                                <td style="width: 300px;">งวดที่</td>
+                                <td>{{ repayments.month }}</td>
+                            </tr>
+                            <tr>
+                                <td style="width: 300px;">กำหนดชำระเงิน</td>
+                                <td>{{ repayments.due_date }}</td>
+                            </tr>
+                            <tr>
+                                <td style="width: 300px;">ผ่อนชำระรายเดือน</td>
+                                <td>{{ repayments.monthly_installments | floatformat:2 | intcomma }} บาท</td>
+                            </tr>
+                            {% if repayments.update_datetime %}
+                                <tr>
+                                    <td style="width: 300px;">วันที่ทำรายการ</td>
+                                    <td>{{ repayments.update_datetime }} น.</td>
+                                </tr>
+                            {% endif %}
+                            <tr>
+                                <td style="width: 300px;">สถานะ</td>
+                                <td>{% if repayments.status %}
+                                    <b class="text-success">ชำระเงินแล้ว</b>
+                                {% else %}
+                                    <b class="text-warning">ยังไม่ชำระเงิน</b>  
+                                {% endif %}</td>
+                            </tr>
+                            {% if repayments.picture %}
+                                <tr>
+                                    <td style="width: 250px;">รูปภาพสินค้าขายฝาก</td>
+                                    <td style="text-align: center; vertical-align: middle;">
+                                        <img src="{{ repayments.picture.url }}" alt="profile image" class="img-fluid rounded" style="display: block; margin: 0 auto;" width="30%" height="150">
+                                    </td>
+                                </tr>
+                            {% endif %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock content %}

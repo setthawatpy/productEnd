@@ -30,7 +30,7 @@
                 <div class="card-block px-5">
                     <div class="d-flex justify-content-between align-items-center">
                         <h6 class="mb-4 f-20">รายการขายทองคำ</h6>
-                        <h6 class="mb-0 f-20 text-end">{{ counter }} รายการ</h6>
+                        <h6 class="mb-0 f-20 text-end">{{ quantity }} รายการ</h6>
                     </div>
                     <div class="table-responsive">
                         <table class="table">
@@ -45,24 +45,32 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                {% for item in cartItem %}
-                                    <tr>
-                                        <th scope="row">
-                                            <img src="{{ item.product.picture1.url }}" style="width: 100px; height: 100px">
-                                        </th>
-                                        <td>{{ item.product.title }}</td>
-                                        <td class="text-center">{{ item.quantity }}</td>
-                                        <td class="text-center">{{ item.sub_charge  | floatformat:2 | intcomma }}</td>
-                                        <td class="text-center">{{ item.product.price | floatformat:2 | intcomma }}</td>
-                                        <td class="text-center">{{ item.sub_total  | floatformat:2 | intcomma }}</td>
-                                        <td class="text-center">
-                                            <a href="{% url 'removeCart' item.product.id %}">
-                                                <i class="fa-solid fa-trash btn btn-danger"></i>
-                                            </a>
-                                        </td>
-                                    </tr>
-                                {% endfor %}
                             </tbody>
+                            {% for item in cartItem %}
+                                <tr>
+                                    <th scope="row">
+                                        <a href="{% url 'productDetail' item.product.id %}">
+                                            <img src="{{ item.product.picture1.url }}" style="width: 100px; height: 100px">
+                                        </a>
+                                    </th>
+                                    <td>{{ item.product.title }}</td>
+                                    <td>
+                                        <div class="input-group ">
+                                            <a href="{% url "reduce_cart" item.product.id %}" class="btn btn-outline-secondary" id="minus-btn">-</a>
+                                            <input type="number" class="form-control text-center" id="quantity-input" value="{{ item.quantity }}" min="1" style="width: 10px;">
+                                            <a href="{% url "add_cart" item.product.id %}" class="btn btn-outline-secondary" id="plus-btn">+</a>
+                                        </div>
+                                    </td>
+                                    <td class="text-center">{{ item.sub_charge | floatformat:2 | intcomma }}</td>
+                                    <td class="text-center">{{ item.product.price | floatformat:2 | intcomma }}</td>
+                                    <td class="text-center">{{ item.sub_total  | floatformat:2 | intcomma }}</td>
+                                    <td class="text-center">
+                                        <a href="{% url 'remove_cart' item.product.id %}">
+                                            <i class="fa-solid fa-trash btn btn-danger"></i>
+                                        </a>
+                                    </td>
+                                </tr>
+                            {% endfor %}
                         </table>
                         <hr class="my-4">
                     </div>
@@ -77,7 +85,7 @@
                     </div>
                     <div class="d-flex justify-content-between mb-3">
                         <h5 class="f-16">ยอดชำระเงินทั้งหมด</h5>
-                        <h5>{{ netTotal | floatformat:2 | intcomma }} บาท</h5>
+                        <h5>{{ net_total | floatformat:2 | intcomma }} บาท</h5>
                     </div>
                     <a href="{% url 'order' %}" method="POST">
                         <button type="button" class="btn btn-success w-100">ดำเนินการ</button>
@@ -87,33 +95,23 @@
         </div>
     {% endif %}
 </div>
-{% comment %} <script>
-    {% for item in cartItem %}
-    const minusBtn_{{ item.id }} = document.getElementById('minus-btn_{{ item.id }}');
-    const plusBtn_{{ item.id }} = document.getElementById('plus-btn_{{ item.id }}');
-    const quantityInput_{{ item.id }} = document.getElementById('quantity-input_{{ item.id }}');
+<script>
+    const minusBtn = document.getElementById('minus-btn');
+    const plusBtn = document.getElementById('plus-btn');
+    const quantityInput = document.getElementById('quantity-input');
 
-    minusBtn_{{ item.id }}.addEventListener('click', () => {
-        let currentValue = parseInt(quantityInput_{{ item.id }}.value, 10);
-        if (currentValue > 1) {
-            quantityInput_{{ item.id }}.value = currentValue - 1;
+    minusBtn.addEventListener('click', () => {
+        if (quantityInput.value > 1) {
+            quantityInput.value = parseInt(quantityInput.value) - 1;
         }
     });
 
-    plusBtn_{{ item.id }}.addEventListener('click', () => {
-        let currentValue = parseInt(quantityInput_{{ item.id }}.value, 10);
-        quantityInput_{{ item.id }}.value = currentValue + 1;
+    plusBtn.addEventListener('click', () => {
+        quantityInput.value = parseInt(quantityInput.value) + 1;
     });
-    {% endfor %}
+</script>
 
-    document.addEventListener('DOMContentLoaded', function () {
-        const refreshButton = document.getElementById('refresh-button');
-        
-        refreshButton.addEventListener('click', function () {
-            location.reload(); // รีเฟรชหน้าเว็บ
-        });
-    });
-</script> {% endcomment %}
+
 
 <style>
     input[type="number"]::-webkit-inner-spin-button,

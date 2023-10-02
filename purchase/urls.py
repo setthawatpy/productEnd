@@ -7,5 +7,9 @@ urlpatterns = [
     path('deletePurchases/<int:id>', views.deletePurchases, name='deletePurchases'),
     path('purchasesList', views.purchasesList, name='purchasesList'),
     path('purchasesDetail/<id>', views.purchasesDetail, name='purchasesDetail'),
-    path('purchaseReceipt/<id>>', views.purchaseReceipt, name='purchaseReceipt'),
+    path('purchaseReceipt/<id>', views.purchaseReceipt, name='purchaseReceipt'),
+    path('search_purchases', views.search_purchases, name='search_purchases'),
+    
+    
+    path('render_pdf_view/<id>', views.render_pdf_view, name='render_pdf_view'),
 ]
